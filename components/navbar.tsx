@@ -51,7 +51,7 @@ const AppNavbar = () => {
                 Services
               </a>
               <a
-                href="#"
+                href="/about-us"
                 className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
               >
                 About Us
@@ -120,7 +120,7 @@ const AppNavbar = () => {
               Services
             </a>
             <a
-              href="#"
+              href="/about-us"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
             >
               About Us
