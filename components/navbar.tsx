@@ -1,13 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const { scrollY } = useScroll();
+  const navbarY = useTransform(scrollY, [0, 100], [0, -20]);
+  const navbarOpacity = useTransform(scrollY, [0, 100], [1, 0.9]);
+  const navbarScale = useTransform(scrollY, [0, 100], [1, 0.95]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,12 +39,98 @@ const AppNavbar = () => {
     height: 24,
   };
 
+  // Animation variants
+  const navItemVariants = {
+    hover: {
+      y: -2,
+      transition: { duration: 0.2, ease: "easeOut" },
+    },
+  };
+
+  const logoVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.2, ease: "easeOut" },
+    },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.2, ease: "easeOut" },
+    },
+    tap: {
+      scale: 0.95,
+      transition: { duration: 0.1 },
+    },
+  };
+
+  const mobileMenuVariants = {
+    closed: {
+      opacity: 0,
+      y: -20,
+      transition: { duration: 0.2 },
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  };
+
+  const scrollNavbarVariants = {
+    initial: { y: 0, opacity: 1, scale: 1 },
+    scrolled: {
+      y: -10,
+      opacity: 0.95,
+      scale: 0.98,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    // Check if we're on the home page
+    const isHomePage =
+      window.location.pathname === "/" || window.location.pathname === "/home";
+
+    if (isHomePage) {
+      // If on home page, just scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const lenis = (window as any).lenis;
+        if (lenis) {
+          lenis.scrollTo(element, { offset: -100 });
+        } else {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    } else {
+      // If on another page, redirect to home page with section hash
+      window.location.href = `/#${sectionId}`;
+    }
+  };
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 mt-4 bg-transparent">
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50 mt-4 bg-transparent"
+      style={{ y: navbarY, opacity: navbarOpacity, scale: navbarScale }}
+      variants={scrollNavbarVariants}
+      animate={isScrolled ? "scrolled" : "initial"}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 bg-transparent">
           {/* Logo */}
-          <div className="flex-shrink-0 mt-4 ">
+          <motion.div
+            className="flex-shrink-0 mt-4"
+            variants={logoVariants}
+            whileHover="hover"
+            whileTap="tap"
+            animate={isScrolled ? { scale: 0.95 } : { scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <Image
               src="/adwello-logo.png"
               alt="Adwello"
@@ -33,62 +138,162 @@ const AppNavbar = () => {
               height={32}
               priority
             />
-          </div>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block border-1 border-[#FF6300] rounded-3xl px-8 py-2 bg-[#111111] mt-4">
+          <motion.div
+            className="hidden md:block border-1 border-[#FF6300] rounded-3xl px-8 py-2 bg-[#111111] mt-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: isScrolled ? 0.95 : 1,
+              // y: isScrolled ? -5 : 0,
+            }}
+            transition={{
+              duration: 0.5,
+              delay: 0.2,
+              scale: { duration: 0.3 },
+              y: { duration: 0.3 },
+            }}
+          >
             <div className="px-14 flex items-center space-x-10">
-              <a
-                href="#"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
+              <motion.a
+                href="/#home"
+                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                variants={navItemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                animate={isScrolled ? { y: -1 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("home");
+                }}
               >
+                <motion.div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#FF6300]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.2 }}
+                />
                 Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
+              </motion.a>
+              <motion.a
+                href="#services"
+                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                variants={navItemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                animate={isScrolled ? { y: -1 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("services");
+                }}
               >
+                <motion.div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#FF6300]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.2 }}
+                />
                 Services
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="/about-us"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
+                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                variants={navItemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                animate={isScrolled ? { y: -1 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
               >
+                <motion.div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#FF6300]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.2 }}
+                />
                 About Us
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="/blog"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
+                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                variants={navItemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                animate={isScrolled ? { y: -1 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
               >
+                <motion.div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#FF6300]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.2 }}
+                />
                 Blog
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA Button */}
-          <div className="hidden md:block mt-4">
-            <Button
-              variant="light"
-              href="/contact"
-              as={Link}
-              startContent={
-                <Image
-                  src={chatImage.src}
-                  alt={chatImage.alt}
-                  width={chatImage.width}
-                  height={chatImage.height}
-                  className="w-8 h-8 hover:scale-110 transition-all duration-300"
-                />
-              }
+          <motion.div
+            className="hidden md:block mt-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              scale: isScrolled ? 0.95 : 1,
+              y: isScrolled ? -5 : 0,
+            }}
+            transition={{
+              duration: 0.5,
+              delay: 0.3,
+              scale: { duration: 0.3 },
+              y: { duration: 0.3 },
+            }}
+          >
+            <motion.div
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
             >
-              <span className="text-md font-bold underline underline-offset-6 mb-1">
-                Let's Talk
-              </span>
-            </Button>
-          </div>
+              <Button
+                variant="light"
+                href="/contact"
+                as={Link}
+                startContent={
+                  <motion.div
+                    whileHover={{ rotate: 5 }}
+                    animate={isScrolled ? { rotate: 2 } : { rotate: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image
+                      src={chatImage.src}
+                      alt={chatImage.alt}
+                      width={chatImage.width}
+                      height={chatImage.height}
+                      className="w-8 h-8 hover:scale-110 transition-all duration-300"
+                    />
+                  </motion.div>
+                }
+              >
+                <span className="text-md font-bold underline underline-offset-6 mb-1">
+                  Let's Talk
+                </span>
+              </Button>
+            </motion.div>
+          </motion.div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <motion.div
+            className="md:hidden"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            animate={isScrolled ? { scale: 0.95 } : { scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <button
               onClick={toggleMenu}
               className="text-gray-900 hover:text-[#FF6300] focus:outline-none"
@@ -99,48 +304,76 @@ const AppNavbar = () => {
                 <Menu className="h-6 w-6" />
               )}
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden">
+        <motion.div
+          className="md:hidden"
+          variants={mobileMenuVariants}
+          initial="closed"
+          animate="open"
+          exit="closed"
+        >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
-            <a
-              href="#"
+            <motion.a
+              href="#home"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("home");
+                setIsMenuOpen(false); // Close mobile menu after clicking
+              }}
             >
               Home
-            </a>
-            <a
-              href="#"
+            </motion.a>
+            <motion.a
+              href="#services"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("services");
+                setIsMenuOpen(false); // Close mobile menu after clicking
+              }}
             >
               Services
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/about-us"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
               About Us
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/blog"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
               Blog
-            </a>
-            <div className="px-3 py-2">
+            </motion.a>
+            <motion.div
+              className="px-3 py-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
               <button className="w-full bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-900 hover:text-white transition-all duration-200 flex items-center justify-center space-x-2">
                 <MessageCircle className="w-5 h-5" />
                 <span>Let's Talk</span>
               </button>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   );
 };
 

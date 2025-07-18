@@ -3,7 +3,10 @@ import Image from "next/image";
 
 const Services = () => {
   return (
-    <section className="relative bg-[#0C0C0C] lg:min-h-screen py-12 sm:py-16 lg:py-0">
+    <section
+      id="services"
+      className="relative bg-[#0C0C0C] lg:min-h-screen py-12 sm:py-16 lg:py-0"
+    >
       {/* Background - hidden on mobile */}
       <div className="absolute bottom-0 left-0 w-full pointer-events-none z-0 hidden lg:block">
         <Image
@@ -36,9 +39,15 @@ const Services = () => {
                 <span className="relative z-10">
                   <span className="relative">
                     <span className="absolute -left-2 -top-3 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-[#FF6300] rounded-full z-0 opacity-50"></span>
-                    <span className="relative z-10">BOOK</span>
+                    <a
+                      href="https://calendly.com/adwellomarketing/adwello-book-a-free-consultation"
+                      className="relative z-10"
+                    >
+                      <span className="relative z-10">
+                        BOOK &nbsp;A FREE CONSULTATION +
+                      </span>
+                    </a>
                   </span>
-                  &nbsp;A FREE CONSULTATION +
                 </span>
               </button>
             </div>

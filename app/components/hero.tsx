@@ -4,7 +4,10 @@ import { Button } from "@heroui/button";
 
 const Hero = () => {
   return (
-    <section className="relative bg-[#121212] min-h-screen lg:min-h-screen overflow-hidden py-12 sm:py-16 lg:py-0">
+    <section
+      id="home"
+      className="relative bg-[#121212] min-h-screen lg:min-h-screen overflow-hidden py-12 sm:py-16 lg:py-0"
+    >
       {/* Background Images */}
       <div className="absolute bottom-0 left-0 w-full pointer-events-none z-0">
         <Image
@@ -46,8 +49,8 @@ const Hero = () => {
               WE ARE ADWELLO
             </h2>
 
-            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-[5.5rem] font-bold leading-tight max-w-3xl text-center lg:text-left mx-auto lg:mx-0">
-              A digital partner built for growth.
+            <h1 className="text-white text-3xl sm:text-4xl md:text-4xl lg:text-[5rem] font-bold leading-tight max-w-3xl text-center lg:text-left mx-auto lg:mx-0">
+              Your Digital Partner In Growth
             </h1>
 
             <p className="text-white max-w-xl text-base sm:text-lg lg:text-[1.5rem] text-center lg:text-left mx-auto lg:mx-0 px-4 lg:px-0">
@@ -61,9 +64,15 @@ const Hero = () => {
                 <span className="relative z-10">
                   <span className="relative">
                     <span className="absolute -left-2 -top-3 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-[#FF6300] rounded-full z-0 opacity-50"></span>
-                    <span className="relative z-10">GET</span>
+                    <a
+                      href="https://calendly.com/adwellomarketing/adwello-book-a-free-consultation"
+                      className="relative z-10"
+                    >
+                      <span className="relative z-10">
+                        BOOK &nbsp;A FREE CONSULTATION +
+                      </span>
+                    </a>
                   </span>
-                  &nbsp;TO KNOW US +
                 </span>
               </button>
             </div>

@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import AppNavbar from "@/components/navbar";
 import AppFooter from "@/components/footer";
+import SmoothScroll from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
   title: {
@@ -43,11 +44,13 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen bg-white">
-            <AppNavbar />
-            <main>{children}</main>
-            <AppFooter />
-          </div>
+          <SmoothScroll>
+            <div className="relative flex flex-col h-screen bg-white">
+              <AppNavbar />
+              <main>{children}</main>
+              <AppFooter />
+            </div>
+          </SmoothScroll>
         </Providers>
       </body>
     </html>
