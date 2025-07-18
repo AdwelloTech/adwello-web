@@ -41,12 +41,22 @@ const Blog = () => {
       <div className="relative z-10 max-w-screen-xl mx-auto px-6 min-h-screen flex items-center justify-center">
         <div className="grid md:grid-cols-3 gap-16 lg:gap-20 items-center w-full">
           {/* Left Column: Title and Description */}
-          <div className="md:col-span-1">
-            <h2 className="text-white text-4xl lg:text-5xl font-bold mb-4">
+          <div className="md:col-span-1 gap-4 flex flex-col ">
+            <h2 className="text-white text-5xl leading-tight font-bold mb-4">
               Insights from Adwello
             </h2>
-            <div className="h-[2px] w-20 bg-[#FF6300] mb-6"></div>
-            <p className="text-white text-lg leading-relaxed">
+            <div className="flex items-start">
+              <svg
+                width="200"
+                height="2"
+                viewBox="0 0 200 2"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="200" height="2" fill="#FF6300" />
+              </svg>
+            </div>
+            <p className="text-white text-xl leading-relaxed mt-2">
               Stay ahead with smart digital strategy, web design tips, and
               marketing insights to help your business grow.
             </p>

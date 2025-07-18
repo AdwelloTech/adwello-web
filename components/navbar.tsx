@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
 
 const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,6 +69,8 @@ const AppNavbar = () => {
           <div className="hidden md:block mt-4">
             <Button
               variant="light"
+              href="/contact"
+              as={Link}
               startContent={
                 <Image
                   src={chatImage.src}
