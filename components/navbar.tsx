@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Menu, X, MessageCircle } from 'lucide-react';
-import Image from 'next/image';
-import { Button } from '@heroui/button';
+import React, { useState } from "react";
+import { Menu, X, MessageCircle } from "lucide-react";
+import Image from "next/image";
+import { Button } from "@heroui/button";
 
 const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +17,7 @@ const AppNavbar = () => {
     alt: "Chat",
     width: 24,
     height: 24,
-  }
+  };
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 mt-4 bg-transparent">
@@ -50,7 +50,7 @@ const AppNavbar = () => {
                 Services
               </a>
               <a
-                href="#"
+                href="/about-us"
                 className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200"
               >
                 About Us
@@ -66,14 +66,21 @@ const AppNavbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block mt-4">
-            <Button variant='light' 
-            startContent={<Image 
-            src={chatImage.src} 
-            alt={chatImage.alt} 
-            width={chatImage.width} 
-            height={chatImage.height}
-            className='w-8 h-8 hover:scale-110 transition-all duration-300' />}>
-              <span className='text-md font-bold underline underline-offset-6 mb-1'>Let's Talk</span>
+            <Button
+              variant="light"
+              startContent={
+                <Image
+                  src={chatImage.src}
+                  alt={chatImage.alt}
+                  width={chatImage.width}
+                  height={chatImage.height}
+                  className="w-8 h-8 hover:scale-110 transition-all duration-300"
+                />
+              }
+            >
+              <span className="text-md font-bold underline underline-offset-6 mb-1">
+                Let's Talk
+              </span>
             </Button>
           </div>
 
@@ -110,7 +117,7 @@ const AppNavbar = () => {
               Services
             </a>
             <a
-              href="#"
+              href="/about-us"
               className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
             >
               About Us
