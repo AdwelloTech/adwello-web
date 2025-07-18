@@ -5,28 +5,28 @@ const AppFooter = () => {
   return (
     <footer className="bg-[#0C0C0C] text-white">
       {/* Upper Footer Section */}
-      <div className="max-w-screen-2xl mx-auto px-2 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Left Block - Branding and Tagline */}
-          <div className="">
-            <div className="flex items-center">
+          <div className="text-center md:text-left">
+            <div className="flex justify-center md:justify-start items-center mb-4">
               <Image
                 src="/adwello-footer.png"
                 alt="Adwello"
                 width={200}
                 height={200}
-                className=" w-auto"
+                className="w-auto h-auto max-w-[150px] md:max-w-[200px]"
               />
             </div>
 
-            <p className="text-white text-xl max-w-sm">
+            <p className="text-white text-lg md:text-xl max-w-sm mx-auto md:mx-0">
               Smart digital solutions to grow your business.
             </p>
           </div>
 
           {/* Middle Block - Navigation Links */}
-          <div className="space-y-4">
-            <div className="flex flex-col space-y-3 text-xl mt-14 font-semibold">
+          <div className="text-center md:text-left">
+            <div className="flex flex-col space-y-3 text-lg md:text-xl mt-0 md:mt-14 font-semibold">
               <a
                 href="#"
                 className="text-white hover:text-[#FF6300] transition-colors"
@@ -55,11 +55,11 @@ const AppFooter = () => {
           </div>
 
           {/* Right Block - Social Media and Contact */}
-          <div className="space-y-4">
-            <h3 className="text-white font-semibold text-xl mt-14">
+          <div className="text-center md:text-left">
+            <h3 className="text-white font-semibold text-lg md:text-xl mt-0 md:mt-14 mb-4">
               Follow us
             </h3>
-            <div className="flex space-x-4">
+            <div className="flex justify-center md:justify-start space-x-4 mb-4">
               {/* Facebook Icon */}
               <a
                 href="#"
@@ -105,7 +105,7 @@ const AppFooter = () => {
             </div>
             <a
               href="mailto:hello@adwello.com"
-              className="text-white hover:text-[#FF6300] transition-colors block font-semibold text-lg"
+              className="text-white hover:text-[#FF6300] transition-colors block font-semibold text-base md:text-lg"
             >
               info@adwello.com
             </a>
@@ -115,9 +115,9 @@ const AppFooter = () => {
 
       {/* Lower Footer Section - Copyright and Legal */}
       <div className="border-t border-[#787878] w-3/4 mx-auto">
-        <div className="max-w-screen-2xl mx-auto px-6 py-6">
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-6 py-4 md:py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-white text-sm">
+            <div className="text-white text-sm text-center md:text-left">
               © 2025 Adwello. All rights reserved.
             </div>
             <div className="flex items-center space-x-4 text-sm">

@@ -60,30 +60,30 @@ export default function BlogPage() {
 
         {/* Content Overlay */}
         <div className="absolute inset-0 z-10">
-          <div className="max-w-screen-xl mx-auto px-6 pt-32 pb-16 w-full">
+          <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 pt-20 md:pt-32 pb-12 md:pb-16 w-full">
             {/* Page Header */}
-            <div className="text-center mb-16">
-              <h1 className="text-white text-5xl lg:text-6xl font-bold mb-6">
+            <div className="text-center mb-12 md:mb-16">
+              <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-4">
                 Insights from Adwello
               </h1>
-              <div className="h-[2px] w-32 bg-[#FF6300] mx-auto mb-6"></div>
-              <p className="text-white text-xl max-w-2xl mx-auto">
+              <div className="h-[2px] w-24 md:w-32 bg-[#FF6300] mx-auto mb-4 md:mb-6"></div>
+              <p className="text-white text-lg md:text-xl max-w-2xl mx-auto px-4">
                 Stay ahead with smart digital strategy, web design tips, and
                 marketing insights to help your business grow.
               </p>
             </div>
 
             {/* Blog Posts Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-32">
               {blogPosts.map((post) => (
                 <Link
                   href={`/blog/${post.slug}`}
                   key={post.slug}
                   className="group"
                 >
-                  <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                  <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer mx-4 md:mx-0">
                     {/* Featured Image */}
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="relative h-48 md:h-64 overflow-hidden">
                       <Image
                         src={post.featuredImage}
                         alt={post.title}
@@ -93,7 +93,7 @@ export default function BlogPage() {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6">
+                    <div className="p-4 md:p-6">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[#FF6300] text-sm font-medium">
                           {post.date}
@@ -103,15 +103,15 @@ export default function BlogPage() {
                         </span>
                       </div>
 
-                      <h2 className="text-white text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors">
+                      <h2 className="text-white text-lg md:text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors">
                         {post.title}
                       </h2>
 
-                      <p className="text-gray-400 leading-relaxed">
+                      <p className="text-gray-400 leading-relaxed text-sm md:text-base">
                         {post.excerpt}
                       </p>
 
-                      <div className="mt-4 flex items-center text-[#FF6300] font-medium">
+                      <div className="mt-4 flex items-center text-[#FF6300] font-medium text-sm md:text-base">
                         Read More
                         <svg
                           className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
@@ -137,7 +137,7 @@ export default function BlogPage() {
       </div>
 
       {/* Bottom Background Image */}
-      <div className="relative h-screen overflow-hidden">
+      <div className="relative h-64 md:h-screen overflow-hidden">
         <Image
           src="/blogs/blogs-bottom.png"
           alt="Blog Bottom Background"
