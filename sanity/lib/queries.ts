@@ -12,7 +12,8 @@ export const allPostsQuery = groq`
     "mainImage": mainImage.asset->url,
     "mainImageAlt": mainImage.alt,
     featuredOnHomepage,
-    "categories": categories[]->title
+    "categories": categories[]->title,
+    body
   }
 `;
 
@@ -28,7 +29,8 @@ export const featuredPostsQuery = groq`
     "mainImage": mainImage.asset->url,
     "mainImageAlt": mainImage.alt,
     featuredOnHomepage,
-    "categories": categories[]->title
+    "categories": categories[]->title,
+    body
   }
 `;
 

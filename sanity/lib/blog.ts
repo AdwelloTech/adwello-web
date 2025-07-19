@@ -50,6 +50,22 @@ export function formatDate(dateString: string): string {
   });
 }
 
+// Extract text from Portable Text blocks
+export function extractTextFromPortableText(blocks: any[]): string {
+  if (!blocks || !Array.isArray(blocks)) return "";
+
+  return blocks
+    .map((block) => {
+      if (block._type === "block") {
+        return (
+          block.children?.map((child: any) => child.text || "").join(" ") || ""
+        );
+      }
+      return "";
+    })
+    .join(" ");
+}
+
 // Calculate read time based on content length
 export function calculateReadTime(content: string): string {
   const wordsPerMinute = 200;

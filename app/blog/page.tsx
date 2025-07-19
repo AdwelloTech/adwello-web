@@ -5,6 +5,7 @@ import {
   getAllPosts,
   formatDate,
   calculateReadTime,
+  extractTextFromPortableText,
   BlogPost,
 } from "@/sanity/lib/blog";
 
@@ -85,9 +86,13 @@ export default async function BlogPage() {
                               : "Draft"}
                           </span>
                           <span className="text-gray-400 text-sm">
-                            {post.excerpt
-                              ? calculateReadTime(post.excerpt)
-                              : "5 min read"}
+                            {post.body
+                              ? calculateReadTime(
+                                  extractTextFromPortableText(post.body)
+                                )
+                              : post.excerpt
+                                ? calculateReadTime(post.excerpt)
+                                : "5 min read"}
                           </span>
                         </div>
 

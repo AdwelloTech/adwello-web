@@ -117,15 +117,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     value={post.body}
                     components={{
                       block: {
+                        h1: ({ children }) => (
+                          <h1 className="text-white text-3xl font-bold mb-8 mt-10">
+                            {children}
+                          </h1>
+                        ),
                         h2: ({ children }) => (
                           <h2 className="text-white text-2xl font-bold mb-6 mt-8">
                             {children}
                           </h2>
                         ),
+                        h3: ({ children }) => (
+                          <h3 className="text-white text-xl font-bold mb-4 mt-6">
+                            {children}
+                          </h3>
+                        ),
+                        h4: ({ children }) => (
+                          <h4 className="text-white text-lg font-bold mb-3 mt-5">
+                            {children}
+                          </h4>
+                        ),
                         normal: ({ children }) => (
                           <p className="text-white leading-relaxed mb-6">
                             {children}
                           </p>
+                        ),
+                        blockquote: ({ children }) => (
+                          <blockquote className="border-l-4 border-[#FF6300] pl-4 italic text-gray-300 mb-6">
+                            {children}
+                          </blockquote>
                         ),
                       },
                       list: {
