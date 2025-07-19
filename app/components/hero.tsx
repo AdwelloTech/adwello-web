@@ -69,6 +69,32 @@ const Hero = () => {
     },
   };
 
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8, y: 20 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+    hover: {
+      scale: 1.05,
+      y: -5,
+      transition: { duration: 0.3, ease: "easeInOut" },
+    },
+  };
+
+  const floatingAnimation = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <section
       id="home"
@@ -188,7 +214,7 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right: Rocket Man */}
+          {/* Right: Rocket Man with Stats Cards */}
           <motion.div
             className="relative w-full flex items-center justify-center z-10 order-1 lg:order-2 pt-10 lg:pt-0"
             variants={rocketVariants}
@@ -200,6 +226,55 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
+            {/* Stats Cards */}
+            <motion.div
+              className="absolute top-80 left-0 z-20"
+              variants={cardVariants}
+              whileHover="hover"
+              {...floatingAnimation}
+            >
+              <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl px-12 py-4 shadow-xl">
+                <div className="text-center">
+                  <div className="text-[#FF6300] text-2xl font-bold">150+</div>
+                  <div className="text-white text-sm font-medium">Projects</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="absolute top-1/2 right-10 transform -translate-y-1/2 -translate-x-1/2 z-20"
+              variants={cardVariants}
+              whileHover="hover"
+              {...floatingAnimation}
+              style={{ animationDelay: "1s" }}
+            >
+              <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl px-12 py-4 shadow-xl">
+                <div className="text-center">
+                  <div className="text-[#FF6300] text-2xl font-bold">12+</div>
+                  <div className="text-white text-sm font-medium">
+                    Countries
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-50 left-30 transform -translate-x-1/2 z-20"
+              variants={cardVariants}
+              whileHover="hover"
+              {...floatingAnimation}
+              style={{ animationDelay: "2s" }}
+            >
+              <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl px-12 py-4 shadow-xl">
+                <div className="text-center">
+                  <div className="text-[#FF6300] text-2xl font-bold">98%</div>
+                  <div className="text-white text-sm font-medium">
+                    Satisfaction
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             <motion.div
               animate={{
                 y: [0, -10, 0],
