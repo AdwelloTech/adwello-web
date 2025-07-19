@@ -1,47 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  getAllPosts,
+  formatDate,
+  calculateReadTime,
+  extractTextFromPortableText,
+  BlogPost,
+} from "@/sanity/lib/blog";
 
-const blogPosts = [
-  {
-    slug: "what-is-api-simple-version",
-    title: "What's an API? Here's the simple version",
-    excerpt:
-      "Ever wondered how apps talk to each other? Learn what APIs are and why they're the backbone of modern digital experiences.",
-    date: "July 5, 2025",
-    featuredImage: "/blogs/blogsimage1.jpg",
-    readTime: "5 min read",
-  },
-  {
-    slug: "from-idea-to-interface",
-    title: "From Idea To Interface.........!!",
-    excerpt:
-      "Discover our proven design process that transforms your business ideas into user-friendly, conversion-focused interfaces.",
-    date: "July 3, 2025",
-    featuredImage: "/blogs/blogsimage2.jpg",
-    readTime: "7 min read",
-  },
-  {
-    slug: "no-website-red-zone",
-    title: "No Website? You're in the RED ZONE!",
-    excerpt:
-      "In today's digital war, not having a website puts your business at serious risk. Learn why you need one NOW.",
-    date: "July 1, 2025",
-    featuredImage: "/blogs/blogsimage3.jpg",
-    readTime: "4 min read",
-  },
-  {
-    slug: "erp-crm-hrm-difference",
-    title: "ERP • CRM • HRM What does it all mean?",
-    excerpt:
-      "Confused by business software acronyms? We break down ERP, CRM, and HRM systems in simple terms.",
-    date: "June 28, 2025",
-    featuredImage: "/blogs/blogsimage4.jpg",
-    readTime: "6 min read",
-  },
-];
+export default async function BlogPage() {
+  let blogPosts: BlogPost[] = [];
 
-export default function BlogPage() {
+  try {
+    blogPosts = await getAllPosts();
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    // Return empty array if Sanity is not available
+    blogPosts = [];
+  }
+
   return (
     <div className="min-h-screen bg-black">
       {/* Background Image with Content Overlay */}
@@ -75,62 +53,85 @@ export default function BlogPage() {
 
             {/* Blog Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-32">
-              {blogPosts.map((post) => (
-                <Link
-                  href={`/blog/${post.slug}`}
-                  key={post.slug}
-                  className="group"
-                >
-                  <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer mx-4 md:mx-0">
-                    {/* Featured Image */}
-                    <div className="relative h-48 md:h-64 overflow-hidden">
-                      <Image
-                        src={post.featuredImage}
-                        alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-4 md:p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[#FF6300] text-sm font-medium">
-                          {post.date}
-                        </span>
-                        <span className="text-gray-400 text-sm">
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      <h2 className="text-white text-lg md:text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors">
-                        {post.title}
-                      </h2>
-
-                      <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="mt-4 flex items-center text-[#FF6300] font-medium text-sm md:text-base">
-                        Read More
-                        <svg
-                          className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
+              {blogPosts.length > 0 ? (
+                blogPosts.map((post) => (
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    key={post._id}
+                    className="group"
+                  >
+                    <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer mx-4 md:mx-0">
+                      {/* Featured Image */}
+                      <div className="relative h-48 md:h-64 overflow-hidden">
+                        {post.mainImage ? (
+                          <Image
+                            src={post.mainImage}
+                            alt={post.mainImageAlt || post.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
                           />
-                        </svg>
+                        ) : (
+                          <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                            <span className="text-gray-400">No image</span>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  </article>
-                </Link>
-              ))}
+
+                      {/* Content */}
+                      <div className="p-4 md:p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-[#FF6300] text-sm font-medium">
+                            {post.publishedAt
+                              ? formatDate(post.publishedAt)
+                              : "Draft"}
+                          </span>
+                          <span className="text-gray-400 text-sm">
+                            {post.body
+                              ? calculateReadTime(
+                                  extractTextFromPortableText(post.body)
+                                )
+                              : post.excerpt
+                                ? calculateReadTime(post.excerpt)
+                                : "5 min read"}
+                          </span>
+                        </div>
+
+                        <h2 className="text-white text-lg md:text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors">
+                          {post.title}
+                        </h2>
+
+                        <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="mt-4 flex items-center text-[#FF6300] font-medium text-sm md:text-base">
+                          Read More
+                          <svg
+                            className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                ))
+              ) : (
+                <div className="col-span-2 text-center text-white py-12">
+                  <p className="text-lg mb-4">No blog posts available yet.</p>
+                  <p className="text-gray-400">
+                    Create blog posts in Sanity Studio to see them here.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

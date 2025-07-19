@@ -18,7 +18,7 @@ const CustomCursor = () => {
 
     // Add hover detection for interactive elements
     const interactiveElements = document.querySelectorAll(
-      "a, button, input, textarea, select, [role='button'], [tabindex]"
+      "a, button, input, textarea, select, [role='button'], [tabindex]",
     );
 
     interactiveElements.forEach((el) => {
