@@ -62,7 +62,7 @@ const AppFooter = () => {
             <div className="flex justify-center md:justify-start space-x-4 mb-4">
               {/* Facebook Icon */}
               <a
-                href="https://www.facebook.com/adwello"
+                href="https://www.facebook.com/profile.php?id=61576753425610"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg
@@ -76,7 +76,7 @@ const AppFooter = () => {
               </a>
               {/* Instagram Icon */}
               <a
-                href="https://www.instagram.com/adwello"
+                href="https://www.instagram.com/adwello.lab/"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg
@@ -90,7 +90,7 @@ const AppFooter = () => {
               </a>
               {/* Twitter/X Icon */}
               <a
-                href="https://x.com/adwello"
+                href="https://x.com/adwellolab"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg

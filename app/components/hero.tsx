@@ -288,8 +288,8 @@ const Hero = () => {
               <Image
                 src="/hero/rocket-man.png"
                 alt="Rocket Man"
-                width={1000}
-                height={1000}
+                width={800}
+                height={800}
                 className="relative z-10 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[800px] xl:h-[800px] object-contain"
               />
             </motion.div>
