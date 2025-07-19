@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const CardCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,23 +12,15 @@ const CardCarousel = () => {
       subtitle: "Enterprise Consulting",
       description:
         "Adeste Group is a global enterprise consultancy. They partnered with Adwello to modernize their digital presence with a clean, responsive corporate website that aligns with their international brand standards.",
-      logo: "ADÉSTE GROUP",
+      logo: "/results/adeste-group.png",
     },
     {
       id: 2,
-      title: "TechCorp Solutions",
-      subtitle: "Digital Transformation",
+      title: "EV Consultants Pvt Ltd",
+      subtitle: "Europe Visa Experts",
       description:
-        "TechCorp Solutions needed a comprehensive digital overhaul. We delivered a modern, scalable platform that enhanced their customer engagement and streamlined their business processes.",
-      logo: "TECHCORP",
-    },
-    {
-      id: 3,
-      title: "Innovation Labs",
-      subtitle: "Startup Acceleration",
-      description:
-        "Innovation Labs required a cutting-edge web presence to showcase their portfolio. We created an interactive platform that highlights their innovative projects and attracts potential investors.",
-      logo: "INNOVATION",
+        "EV Consultants is a trusted Sri Lankan visa agency based in Ja‑Ela with a remarkable ~98‑99% approval rate. They assist students and professionals with study and work permits across Europe—including Finland, Sweden, Germany, the UK, Canada, and Latvia.",
+      logo: "/results/ev-consultants.png",
     },
   ];
 
@@ -67,7 +60,7 @@ const CardCarousel = () => {
           <div className="mx-16 bg-[#1A1A1A] rounded-xl p-10 shadow-lg shadow-[#C2373280]/50 h-[350px]">
             {/* Card Title */}
             <h2 className="text-white text-xl font-semibold tracking-wider mb-6 text-start">
-              OUR LATEST PROJECT
+              OUR LATEST PROJECTS
             </h2>
 
             {/* Two Column Layout */}
@@ -75,14 +68,12 @@ const CardCarousel = () => {
               {/* Left: Logo Section */}
               <div className="flex-shrink-0">
                 <div className="bg-white rounded-lg p-6 w-48 h-48 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600 mb-1">
-                      ADÉSTE
-                    </div>
-                    <div className="text-xl font-bold text-orange-500">
-                      GROUP
-                    </div>
-                  </div>
+                  <Image
+                    src={projects[currentSlide].logo}
+                    alt={projects[currentSlide].title}
+                    width={100}
+                    height={100}
+                  />
                 </div>
               </div>
 
@@ -125,7 +116,7 @@ const CardCarousel = () => {
         <div className="bg-[#1A1A1A] rounded-xl p-4 sm:p-6 md:p-8 shadow-lg shadow-[#C2373280]/50 mx-2 sm:mx-4">
           {/* Card Title */}
           <h2 className="text-white text-lg sm:text-xl font-semibold tracking-wider mb-4 sm:mb-6 text-center">
-            OUR LATEST PROJECT
+            OUR LATEST PROJECTS
           </h2>
 
           {/* Mobile: Stack vertically, Tablet: Two columns */}
