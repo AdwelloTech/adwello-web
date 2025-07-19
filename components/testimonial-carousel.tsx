@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 // Star icon component
@@ -106,6 +106,8 @@ const testimonials = [
 
 const TestimonialCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(1); // Default to 1 for SSR
+  const [isClient, setIsClient] = useState(false);
 
   // Responsive cards per view
   const getCardsPerView = () => {
@@ -117,18 +119,25 @@ const TestimonialCarousel = () => {
     return 1; // Default for SSR
   };
 
-  const [cardsPerView, setCardsPerView] = useState(getCardsPerView());
-  const totalSlides = Math.ceil(testimonials.length / cardsPerView);
+  // Handle client-side initialization
+  useEffect(() => {
+    setIsClient(true);
+    setCardsPerView(getCardsPerView());
+  }, []);
 
   // Update cards per view on window resize
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isClient) return;
+
     const handleResize = () => {
       setCardsPerView(getCardsPerView());
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isClient]);
+
+  const totalSlides = Math.ceil(testimonials.length / cardsPerView);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -142,6 +151,104 @@ const TestimonialCarousel = () => {
     const startIndex = currentSlide * cardsPerView;
     return testimonials.slice(startIndex, startIndex + cardsPerView);
   };
+
+  // Don't render until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="hidden lg:flex items-center justify-center gap-4">
+          <div className="flex gap-6 overflow-hidden flex-1 justify-center">
+            {testimonials.slice(0, 3).map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="w-full max-w-[400px] overflow-hidden shadow-lg shadow-white/10"
+              >
+                <div className="bg-[#1A1A1A] rounded-2xl p-8 h-full border border-white/10">
+                  {/* Star Rating */}
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <StarIcon key={i} />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <p className="text-white text-lg leading-relaxed mb-8 min-h-[120px]">
+                    {testimonial.text}
+                  </p>
+
+                  {/* Customer Info */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#FF6300] to-[#FF8A00]">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold text-lg">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-gray-400 text-sm">
+                        {testimonial.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile & Tablet Layout */}
+        <div className="lg:hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            {testimonials.slice(0, 2).map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="w-full overflow-hidden shadow-lg shadow-white/10"
+              >
+                <div className="bg-[#1A1A1A] rounded-2xl p-6 sm:p-8 h-full border border-white/10">
+                  {/* Star Rating */}
+                  <div className="flex gap-1 mb-4 sm:mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <StarIcon key={i} className="w-4 h-4 sm:w-5 sm:h-5" />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
+                    {testimonial.text}
+                  </p>
+
+                  {/* Customer Info */}
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#FF6300] to-[#FF8A00]">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold text-sm sm:text-base lg:text-lg">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-gray-400 text-xs sm:text-sm">
+                        {testimonial.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
