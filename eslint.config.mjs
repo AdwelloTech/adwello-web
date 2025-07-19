@@ -6,6 +6,7 @@ import _import from "eslint-plugin-import";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import jsxA11Y from "eslint-plugin-jsx-a11y";
 import prettier from "eslint-plugin-prettier";
+import nextPlugin from "@next/eslint-plugin-next";
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
@@ -50,9 +51,8 @@ export default defineConfig([
         "plugin:react/recommended",
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
-        "plugin:@next/next/recommended",
-      ),
+        "plugin:jsx-a11y/recommended"
+      )
     ),
 
     plugins: {
@@ -62,12 +62,13 @@ export default defineConfig([
       "@typescript-eslint": typescriptEslint,
       "jsx-a11y": fixupPluginRules(jsxA11Y),
       prettier: fixupPluginRules(prettier),
+      "@next/next": fixupPluginRules(nextPlugin),
     },
 
     languageOptions: {
       globals: {
         ...Object.fromEntries(
-          Object.entries(globals.browser).map(([key]) => [key, "off"]),
+          Object.entries(globals.browser).map(([key]) => [key, "off"])
         ),
         ...globals.node,
       },
@@ -103,6 +104,12 @@ export default defineConfig([
       "no-unused-vars": "off",
       "unused-imports/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "warn",
+
+      // Next.js specific rules
+      "@next/next/no-html-link-for-pages": "error",
+      "@next/next/no-img-element": "error",
+      "@next/next/no-sync-scripts": "error",
+      "@next/next/no-unwanted-polyfillio": "error",
 
       "@typescript-eslint/no-unused-vars": [
         "warn",

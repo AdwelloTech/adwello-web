@@ -52,7 +52,7 @@ export default async function BlogPage() {
             </div>
 
             {/* Blog Posts Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-32">
               {blogPosts.length > 0 ? (
                 blogPosts.map((post) => (
                   <Link
@@ -60,9 +60,9 @@ export default async function BlogPage() {
                     key={post._id}
                     className="group"
                   >
-                    <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer mx-4 md:mx-0">
+                    <article className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer mx-4 md:mx-0 h-[500px] flex flex-col">
                       {/* Featured Image */}
-                      <div className="relative h-48 md:h-64 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden flex-shrink-0">
                         {post.mainImage ? (
                           <Image
                             src={post.mainImage}
@@ -78,7 +78,7 @@ export default async function BlogPage() {
                       </div>
 
                       {/* Content */}
-                      <div className="p-4 md:p-6">
+                      <div className="p-4 md:p-6 flex flex-col flex-1">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-[#FF6300] text-sm font-medium">
                             {post.publishedAt
@@ -96,11 +96,11 @@ export default async function BlogPage() {
                           </span>
                         </div>
 
-                        <h2 className="text-white text-lg md:text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors">
+                        <h2 className="text-white text-lg md:text-xl font-bold mb-3 group-hover:text-[#FF6300] transition-colors line-clamp-2">
                           {post.title}
                         </h2>
 
-                        <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+                        <p className="text-gray-400 leading-relaxed text-sm md:text-base flex-1 line-clamp-3">
                           {post.excerpt}
                         </p>
 
@@ -125,7 +125,7 @@ export default async function BlogPage() {
                   </Link>
                 ))
               ) : (
-                <div className="col-span-2 text-center text-white py-12">
+                <div className="col-span-full text-center text-white py-12">
                   <p className="text-lg mb-4">No blog posts available yet.</p>
                   <p className="text-gray-400">
                     Create blog posts in Sanity Studio to see them here.

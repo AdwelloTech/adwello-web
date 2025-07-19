@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Button } from "@heroui/button";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const Hero = () => {
@@ -228,7 +227,7 @@ const Hero = () => {
           >
             {/* Stats Cards */}
             <motion.div
-              className="absolute top-80 left-0 z-20"
+              className="absolute top-80 left-0 z-20 hidden lg:block"
               variants={cardVariants}
               whileHover="hover"
               {...floatingAnimation}
@@ -242,7 +241,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              className="absolute top-1/2 right-10 transform -translate-y-1/2 -translate-x-1/2 z-20"
+              className="absolute top-1/2 right-10 transform -translate-y-1/2 -translate-x-1/2 z-20 hidden lg:block"
               variants={cardVariants}
               whileHover="hover"
               {...floatingAnimation}
@@ -259,7 +258,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              className="absolute bottom-50 left-30 transform -translate-x-1/2 z-20"
+              className="absolute bottom-50 left-30 transform -translate-x-1/2 z-20 hidden lg:block"
               variants={cardVariants}
               whileHover="hover"
               {...floatingAnimation}

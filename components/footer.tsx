@@ -28,25 +28,25 @@ const AppFooter = () => {
           <div className="text-center md:text-left">
             <div className="flex flex-col space-y-3 text-lg md:text-xl mt-0 md:mt-14 font-semibold">
               <a
-                href="#"
+                href="/#home"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 Home
               </a>
               <a
-                href="#"
+                href="/#services"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 Services
               </a>
               <a
-                href="#"
+                href="/about-us"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 About Us
               </a>
               <a
-                href="#"
+                href="/blog"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 Blog
@@ -62,7 +62,7 @@ const AppFooter = () => {
             <div className="flex justify-center md:justify-start space-x-4 mb-4">
               {/* Facebook Icon */}
               <a
-                href="#"
+                href="https://www.facebook.com/adwello"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg
@@ -76,7 +76,7 @@ const AppFooter = () => {
               </a>
               {/* Instagram Icon */}
               <a
-                href="#"
+                href="https://www.instagram.com/adwello"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg
@@ -90,7 +90,7 @@ const AppFooter = () => {
               </a>
               {/* Twitter/X Icon */}
               <a
-                href="#"
+                href="https://x.com/adwello"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 <svg
@@ -122,14 +122,14 @@ const AppFooter = () => {
             </div>
             <div className="flex items-center space-x-4 text-sm">
               <a
-                href="#"
+                href="/privacy-policy"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 Privacy Policy
               </a>
               <div className="w-px h-4 bg-[#FF6300]"></div>
               <a
-                href="#"
+                href="/terms-of-service"
                 className="text-white hover:text-[#FF6300] transition-colors"
               >
                 Terms of Service

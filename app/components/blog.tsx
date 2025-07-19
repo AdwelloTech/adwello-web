@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getFeaturedPosts, formatDate, BlogPost } from "@/sanity/lib/blog";
+import { getFeaturedPosts, BlogPost } from "@/sanity/lib/blog";
 
 // Function to truncate text to a specific length
 function truncateText(text: string, maxLength: number): string {

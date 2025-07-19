@@ -6,9 +6,9 @@ import { getPostBySlug, formatDate, getAllPostSlugs } from "@/sanity/lib/blog";
 import { PortableText } from "@portabletext/react";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static params for all blog posts
@@ -25,10 +25,11 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
   let post = null;
 
   try {
-    post = await getPostBySlug(params.slug);
+    post = await getPostBySlug(slug);
   } catch (error) {
     console.error("Error fetching blog post:", error);
     notFound();

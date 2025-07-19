@@ -81,27 +81,6 @@ const testimonials = [
     title: "CTO, TechStart Solutions",
     image: "/results/mira.jpg",
   },
-  {
-    id: 4,
-    text: "The website redesign increased our conversion rate by 300%. Adwello's attention to detail is unmatched",
-    name: "Alex Chen",
-    title: "CEO, TechFlow Inc",
-    image: "/results/man-1.png",
-  },
-  {
-    id: 5,
-    text: "Our online sales tripled within the first month. The new e-commerce platform is exactly what we needed",
-    name: "Emma Rodriguez",
-    title: "Founder, EcoStyle Boutique",
-    image: "/results/man-1.png",
-  },
-  {
-    id: 6,
-    text: "Adwello transformed our digital presence completely. The new website perfectly represents our brand",
-    name: "David Kim",
-    title: "Marketing Director, InnovateCorp",
-    image: "/results/man-1.png",
-  },
 ];
 
 const TestimonialCarousel = () => {
