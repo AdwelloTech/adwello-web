@@ -5,7 +5,7 @@ import OurResults from "./components/results";
 import Contact from "./components/contact";
 import ScrollReveal from "@/components/scroll-reveal";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Hero />

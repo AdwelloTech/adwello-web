@@ -1,23 +1,11 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
-
-import { Providers } from "./providers";
-import LayoutWrapper from "@/components/layout-wrapper";
-
-import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
+  title: "Sanity Studio - Adwello",
+  description: "Content management for Adwello",
 };
 
 export const viewport: Viewport = {
@@ -27,7 +15,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default function StudioLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -41,9 +29,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <LayoutWrapper>{children}</LayoutWrapper>
-        </Providers>
+        <div className="h-screen w-full">{children}</div>
       </body>
     </html>
   );

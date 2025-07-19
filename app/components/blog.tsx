@@ -1,30 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getFeaturedPosts, formatDate, BlogPost } from "@/sanity/lib/blog";
 
-const Blog = () => {
-  const blogPosts = [
-    {
-      slug: "what-is-api-simple-version",
-      title: "What's an API? Here's the simple version",
-      image: "/blogs/blogsimage1.jpg",
-    },
-    {
-      slug: "from-idea-to-interface",
-      title: "From Idea To Interface.........!!",
-      image: "/blogs/blogsimage2.jpg",
-    },
-    {
-      slug: "no-website-red-zone",
-      title: "No Website? You're in the RED ZONE!",
-      image: "/blogs/blogsimage3.jpg",
-    },
-    {
-      slug: "erp-crm-hrm-difference",
-      title: "ERP • CRM • HRM What does it all mean?",
-      image: "/blogs/blogsimage4.jpg",
-    },
-  ];
+// Function to truncate text to a specific length
+function truncateText(text: string, maxLength: number): string {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).trim() + "...";
+}
+
+const Blog = async () => {
+  let blogPosts: BlogPost[] = [];
+
+  try {
+    blogPosts = await getFeaturedPosts();
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    // Return empty array if Sanity is not available
+    blogPosts = [];
+  }
 
   return (
     <section className="relative bg-[#0C0C0C] min-h-screen py-12 md:py-20">
@@ -74,20 +69,32 @@ const Blog = () => {
               {blogPosts.map((post) => (
                 <Link
                   href={`/blog/${post.slug}`}
-                  key={post.slug}
-                  className="group cursor-pointer"
+                  key={post._id}
+                  className="group cursor-pointer block"
                 >
                   <div className="flex flex-col">
+                    {/* Image Section */}
                     <div className="relative rounded-xl overflow-hidden h-48 sm:h-52 md:h-56 lg:h-60 mb-3 group-hover:scale-105 transition-transform duration-300">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
+                      {post.mainImage ? (
+                        <Image
+                          src={post.mainImage}
+                          alt={post.mainImageAlt || post.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                          <span className="text-gray-400 text-sm">
+                            No image
+                          </span>
+                        </div>
+                      )}
                     </div>
+
+                    {/* Title Only */}
                     <h3 className="text-white font-bold text-sm sm:text-base md:text-base text-center group-hover:text-[#FF6300] transition-colors px-2">
-                      {post.title}
+                      {truncateText(post.title, 60)}
                     </h3>
                   </div>
                 </Link>
