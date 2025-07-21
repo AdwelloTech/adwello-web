@@ -60,7 +60,7 @@ const Services = () => {
               {/* Desktop: Positioned Cards */}
               <div className="hidden lg:block relative w-full h-[600px] max-w-2xl mx-auto">
                 {/* Card 1 - Custom Websites (Top Left) */}
-                <div className="absolute top-0 left-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6">
+                <div className="absolute top-0 left-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/custom-sites.png"
@@ -79,7 +79,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 2 - Digital Marketing (Top Right) */}
-                <div className="absolute top-16 right-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6">
+                <div className="absolute top-16 right-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/digital-marketing.png"
@@ -98,7 +98,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 3 - Brand Strategy (Bottom Left) */}
-                <div className="absolute bottom-16 left-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6">
+                <div className="absolute bottom-16 left-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/brand-strategy.png"
@@ -117,7 +117,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 4 - Digital Analytics (Bottom Right) */}
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6">
+                <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-8 flex flex-col gap-6 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/digital-analytics.png"
@@ -139,7 +139,7 @@ const Services = () => {
               {/* Mobile: Grid Layout */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
                 {/* Card 1 - Custom Websites */}
-                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4">
+                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/custom-sites.png"
@@ -158,7 +158,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 2 - Digital Marketing */}
-                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4">
+                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/digital-marketing.png"
@@ -177,7 +177,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 3 - Brand Strategy */}
-                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4">
+                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/brand-strategy.png"
@@ -196,7 +196,7 @@ const Services = () => {
                 </div>
 
                 {/* Card 4 - Digital Analytics */}
-                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4">
+                <div className="bg-[#1A1A1A] rounded-xl shadow-lg shadow-[#FF6300]/30 p-6 flex flex-col gap-4 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#FF6300]/40 cursor-pointer">
                   <div className="flex justify-center items-center">
                     <Image
                       src="/services/digital-analytics.png"

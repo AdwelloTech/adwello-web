@@ -19,7 +19,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   return (
     <SmoothScroll>
-      <div className="relative flex flex-col h-screen bg-white">
+      <div className="relative flex flex-col min-h-screen bg-white">
         <AppNavbar />
         <main>{children}</main>
         <AppFooter />

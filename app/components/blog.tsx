@@ -33,7 +33,7 @@ const Blog = async () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 min-h-screen flex items-center justify-center">
+      <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-start md:items-center w-full">
           {/* Left Column: Title and Description */}
           <div className="md:col-span-1 gap-4 flex flex-col text-center md:text-left">

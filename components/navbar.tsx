@@ -89,12 +89,10 @@ const AppNavbar = () => {
   };
 
   const scrollToSection = (sectionId: string) => {
-    // Check if we're on the home page
     const isHomePage =
       window.location.pathname === "/" || window.location.pathname === "/home";
 
     if (isHomePage) {
-      // If on home page, just scroll to section
       const element = document.getElementById(sectionId);
       if (element) {
         const lenis = (window as any).lenis;
@@ -108,8 +106,8 @@ const AppNavbar = () => {
         }
       }
     } else {
-      // If on another page, redirect to home page with section hash
-      window.location.href = `/#${sectionId}`;
+      // Use router.push for hash navigation to avoid full reload and lag
+      router.push(`/#${sectionId}`);
     }
   };
 
@@ -190,6 +188,7 @@ const AppNavbar = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection("services");
+                  setIsMenuOpen(false);
                 }}
               >
                 <motion.div
