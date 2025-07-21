@@ -33,7 +33,12 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head>
+        <meta
+          name="facebook-domain-verification"
+          content="rv11va8jdu6lo2gbve0c5jzqe0u15t"
+        />
+      </head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
