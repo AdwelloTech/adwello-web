@@ -9,6 +9,9 @@ import {
   BlogPost,
 } from "@/sanity/lib/blog";
 
+// Add ISR revalidation
+export const revalidate = 0; // Instant revalidation
+
 export default async function BlogPage() {
   let blogPosts: BlogPost[] = [];
 

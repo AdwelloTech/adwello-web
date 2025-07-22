@@ -4,18 +4,19 @@ import ContactForm from "./contactForm";
 
 const Contact = () => {
   return (
-    <section className="relative bg-[#121212] min-h-screen py-12 md:py-20">
-      <div className="absolute bottom-0 left-0 w-full pointer-events-none z-0">
+    <section className="relative bg-[#0C0C0C] min-h-screen py-12 md:py-20">
+      {/* Background Image */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <Image
           src="/contact/contact-bg.png"
           alt="Contact Background"
-          width={1000}
-          height={1000}
-          className="w-full h-[100vh] object-cover opacity-20"
+          fill
+          className="object-cover opacity-20"
         />
       </div>
 
-      <div className="flex flex-col items-center justify-center py-12 md:py-20 gap-4 md:gap-6 px-4 md:px-8">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center py-12 md:py-20 gap-4 md:gap-6 px-4 md:px-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center max-w-4xl">
           Ready to grow your business?
         </h1>
@@ -41,7 +42,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="px-4 md:px-8 lg:px-12">
+      <div className="relative z-10 px-4 md:px-8 lg:px-12">
         <ContactForm />
       </div>
     </section>
