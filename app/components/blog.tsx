@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedPosts, BlogPost } from "@/sanity/lib/blog";
 
+// Add ISR revalidation
+export const revalidate = 0; // Instant revalidation
+
 // Function to truncate text to a specific length
 function truncateText(text: string, maxLength: number): string {
   if (!text) return "";

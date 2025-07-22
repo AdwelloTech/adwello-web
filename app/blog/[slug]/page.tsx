@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPostBySlug, formatDate, getAllPostSlugs } from "@/sanity/lib/blog";
+import { getPostBySlug, formatDate } from "@/sanity/lib/blog";
 import { PortableText } from "@portabletext/react";
 
 interface BlogPostPageProps {
@@ -11,18 +11,8 @@ interface BlogPostPageProps {
   }>;
 }
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  try {
-    const posts = await getAllPostSlugs();
-    return posts.map((post) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
-}
+// Add ISR revalidation
+export const revalidate = 0; // Instant revalidation
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
