@@ -38,6 +38,21 @@ export default function RootLayout({
           name="facebook-domain-verification"
           content="rv11va8jdu6lo2gbve0c5jzqe0u15t"
         />
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-FNYJEDCDZ7"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FNYJEDCDZ7');
+            `,
+          }}
+        />
         {/* Meta Pixel Code */}
         <script
           dangerouslySetInnerHTML={{
