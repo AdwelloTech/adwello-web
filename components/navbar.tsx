@@ -233,6 +233,23 @@ const AppNavbar = () => {
                 />
                 Blog
               </motion.a>
+              <motion.a
+                href="/our-team"
+                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                variants={navItemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                animate={isScrolled ? { y: -1 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#FF6300]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.2 }}
+                />
+                Our Team
+              </motion.a>
             </div>
           </motion.div>
 
@@ -358,6 +375,14 @@ const AppNavbar = () => {
               whileTap={{ scale: 0.95 }}
             >
               Blog
+            </motion.a>
+            <motion.a
+              href="/our-team"
+              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Our Team
             </motion.a>
             <motion.div
               className="px-3 py-2"
