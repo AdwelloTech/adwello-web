@@ -1,133 +1,102 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Team member data
 const teamData = {
-  tecTeam: [
+  leadershipTeam: [
     {
       id: 1,
-      name: "Sajad Ahamed",
-      role: "UI/UX Designer",
-      image: "/results/sajad.jpg", // Placeholder - will be updated later
+      name: "Diyan Pabasara",
+      role: "Founder & Team Lead",
+      image: "/our-team/diyan-pabasara-profile.jpg",
     },
     {
       id: 2,
-      name: "Mohamed Farhath",
-      role: "Software Engineer",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      name: "Alex Fernando",
+      role: "Co-Founder",
+      image: "/results/man-1.png", // No profile image available yet
     },
+  ],
+  tecTeam: [
     {
       id: 3,
-      name: "Imaadh Ifthikar",
-      role: "Software Engineer",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      name: "Sajad Ahamed",
+      role: "UI/UX Designer",
+      image: "/our-team/sajad-ahamed-profile.jpg",
     },
     {
       id: 4,
+      name: "Mohamed Farhat",
+      role: "Software Engineer",
+      image: "/our-team/mohamed-farhat-profile.jpg",
+    },
+    {
+      id: 5,
+      name: "Imaadh Ifthikar",
+      role: "Software Engineer",
+      image: "/our-team/imaadh-ifthikar-profile.jpg",
+    },
+    {
+      id: 6,
       name: "Gaurava",
       role: "Software Engineer",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      image: "/our-team/gaurava-profile.jpg",
     },
   ],
   marketingTeam: [
     {
-      id: 5,
+      id: 7,
       name: "Madushani",
       role: "Marketing",
-      image: "/results/sarah.jpg", // Placeholder - will be updated later
+      image: "/results/sarah.jpg", // No profile image available yet
     },
     {
-      id: 6,
+      id: 8,
       name: "Sachin",
       role: "Marketing",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      image: "/results/man-1.png", // No profile image available yet
     },
     {
-      id: 7,
+      id: 9,
       name: "Savith",
       role: "Marketing",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      image: "/our-team/savith-profile.png",
     },
   ],
   hrOperations: [
     {
-      id: 8,
+      id: 10,
       name: "Sansuka Gamage",
       role: "Manager",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      image: "/our-team/sansuka-gamage-profile.jpg",
     },
     {
-      id: 9,
+      id: 11,
       name: "Upeksha Lakmali",
       role: "HR Manager",
-      image: "/results/sarah.jpg", // Placeholder - will be updated later
+      image: "/results/sarah.jpg", // No profile image available yet
     },
   ],
   designVideoTeam: [
     {
-      id: 10,
+      id: 12,
       name: "N.Fernando",
       role: "Designer",
-      image: "/results/man-1.png", // Placeholder - will be updated later
+      image: "/our-team/n-fernando-profile.png",
     },
     {
-      id: 11,
+      id: 13,
       name: "Praneeth",
       role: "Designer",
-      image: "/results/man-1.png", // Placeholder - will be updated later
-    },
-  ],
-};
-
-// Project data
-const projectData = {
-  tecProjects: [
-    {
-      id: 1,
-      title: "E-commerce Platform",
-      description: "Custom e-commerce solution with advanced features",
-      image: "/services/custom-sites.png",
-      category: "Web Development",
-    },
-    {
-      id: 2,
-      title: "Mobile App",
-      description: "Cross-platform mobile application",
-      image: "/services/digital-marketing.png",
-      category: "Mobile Development",
-    },
-    {
-      id: 3,
-      title: "CRM System",
-      description: "Customer relationship management platform",
-      image: "/services/brand-strategy.png",
-      category: "Software Development",
-    },
-  ],
-  marketingProjects: [
-    {
-      id: 4,
-      title: "Digital Campaign",
-      description: "Multi-channel marketing campaign",
-      image: "/services/digital-marketing.png",
-      category: "Digital Marketing",
-    },
-    {
-      id: 5,
-      title: "SEO Optimization",
-      description: "Search engine optimization project",
-      image: "/services/digital-analytics.png",
-      category: "SEO",
+      image: "/results/man-1.png", // No profile image available yet
     },
   ],
 };
 
 export default function OurTeamPage() {
-  const [showTecProjects, setShowTecProjects] = useState(false);
-  const [showMarketingProjects, setShowMarketingProjects] = useState(false);
-
   return (
     <div className="min-h-screen bg-black">
       {/* Top Background Image */}
@@ -160,32 +129,37 @@ export default function OurTeamPage() {
         </div>
       </div>
 
-      {/* Middle Section - Black Background */}
-      <div className="bg-black py-16 md:py-24">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Tech Team Section */}
+      {/* Content Section with Bottom Background */}
+      <div className="relative z-10 bg-black py-16 md:py-24">
+        {/* Bottom Background Image Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-[500px] md:h-[800px] overflow-hidden pointer-events-none">
+          <Image
+            src="/our-team/our-team-bottom.png"
+            alt="Our Team Bottom Background"
+            fill
+            className="object-contain object-bottom opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/30 to-black/70"></div>
+        </div>
+
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Leadership Team Section */}
           <div className="mb-20">
             <div className="max-w-6xl mx-auto px-4 relative">
               {/* Header Section */}
-              <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center mb-12 text-center relative">
-                <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-0">
-                  Tech Team
+              <div className="text-center mb-12">
+                <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                  Leadership Team
                 </h2>
-                <button
-                  onClick={() => setShowTecProjects(!showTecProjects)}
-                  className="text-white underline hover:text-[#FF6300] transition-colors text-lg sm:absolute sm:right-0"
-                >
-                  View Projects
-                </button>
               </div>
 
-              {/* Team Members or Projects */}
-              {!showTecProjects ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {teamData.tecTeam.map((member) => (
+              {/* Team Members - Centered for 2 members */}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+                  {teamData.leadershipTeam.map((member) => (
                     <div
                       key={member.id}
-                      className="bg-[#262626] rounded-t-xl p-8 transition-transform duration-300 hover:scale-105 h-80"
+                      className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 w-80 h-80"
                       style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
                     >
                       <div className="flex flex-col items-center text-center h-full justify-center">
@@ -196,6 +170,9 @@ export default function OurTeamPage() {
                             width={128}
                             height={128}
                             className="w-full h-full object-cover"
+                            quality={100}
+                            priority={true}
+                            unoptimized={true}
                           />
                         </div>
                         <h3 className="text-white font-bold text-2xl mb-2">
@@ -206,165 +183,204 @@ export default function OurTeamPage() {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {projectData.tecProjects.map((project) => (
+              </div>
+            </div>
+          </div>
+
+          {/* Tech Team Section */}
+          <div className="mb-20">
+            <div className="max-w-6xl mx-auto px-4 relative">
+              {/* Header Section */}
+              <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center mb-12 text-center relative">
+                <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-0">
+                  Tech Team
+                </h2>
+                <Link
+                  href="/our-team/tech-projects"
+                  className="text-white underline hover:text-[#FF6300] transition-colors text-lg sm:absolute sm:right-0"
+                >
+                  View Projects
+                </Link>
+              </div>
+
+              {/* Team Members */}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {teamData.tecTeam.map((member) => (
                     <div
-                      key={project.id}
-                      className="bg-[#262626] rounded-t-xl p-8 transition-transform duration-300 hover:scale-105 h-80"
+                      key={member.id}
+                      className="bg-[#262626] rounded-t-xl p-6 transition-transform duration-300 hover:scale-105 w-64 h-72"
                       style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
                     >
-                      <div className="flex flex-col h-full justify-center">
-                        <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
+                      <div className="flex flex-col items-center text-center h-full justify-center">
+                        <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
                           <Image
-                            src={project.image}
-                            alt={project.title}
-                            width={400}
-                            height={200}
+                            src={member.image}
+                            alt={member.name}
+                            width={128}
+                            height={128}
                             className="w-full h-full object-cover"
+                            quality={100}
+                            priority={true}
+                            unoptimized={true}
                           />
                         </div>
-                        <h3 className="text-white font-bold text-xl mb-2">
-                          {project.title}
+                        <h3 className="text-white font-bold text-2xl mb-2">
+                          {member.name}
                         </h3>
-                        <p className="text-gray-400 text-sm mb-3">
-                          {project.description}
-                        </p>
-                        <span className="text-[#FF6300] text-sm font-medium">
-                          {project.category}
-                        </span>
+                        <p className="text-gray-400 text-lg">{member.role}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
 
           {/* Marketing Team Section */}
           <div className="mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                Marketing Team
-              </h2>
-            </div>
-
-            {/* Team Members */}
-            <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto mb-12">
-              {teamData.marketingTeam.map((member) => (
-                <div
-                  key={member.id}
-                  className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 min-h-[20rem] w-72"
-                  style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
+            <div className="max-w-6xl mx-auto px-4 relative">
+              {/* Header Section */}
+              <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center mb-12 text-center relative">
+                <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-0">
+                  Marketing Team
+                </h2>
+                <Link
+                  href="/our-team/marketing-projects"
+                  className="text-white underline hover:text-[#FF6300] transition-colors text-lg sm:absolute sm:right-0"
                 >
-                  <div className="flex flex-col items-center text-center h-full justify-center">
-                    <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        width={128}
-                        height={128}
-                        className="w-full h-full object-cover"
-                      />
+                  View Projects
+                </Link>
+              </div>
+
+              {/* Team Members */}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {teamData.marketingTeam.map((member) => (
+                    <div
+                      key={member.id}
+                      className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 w-80 h-80"
+                      style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
+                    >
+                      <div className="flex flex-col items-center text-center h-full justify-center">
+                        <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            width={128}
+                            height={128}
+                            className="w-full h-full object-cover"
+                            quality={100}
+                            priority={true}
+                            unoptimized={true}
+                          />
+                        </div>
+                        <h3 className="text-white font-bold text-2xl mb-2">
+                          {member.name}
+                        </h3>
+                        <p className="text-gray-400 text-lg">{member.role}</p>
+                      </div>
                     </div>
-                    <h3 className="text-white font-bold text-2xl mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-gray-400 text-lg">{member.role}</p>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
           {/* HR & Operations Section */}
           <div className="mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                HR & Operations
-              </h2>
-            </div>
+            <div className="max-w-6xl mx-auto px-4 relative">
+              {/* Header Section */}
+              <div className="text-center mb-12">
+                <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                  HR & Operations
+                </h2>
+              </div>
 
-            <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
-              {teamData.hrOperations.map((member) => (
-                <div
-                  key={member.id}
-                  className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 h-80 w-[250px]"
-                  style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
-                >
-                  <div className="flex flex-col items-center text-center h-full justify-center">
-                    <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        width={128}
-                        height={128}
-                        className="w-full h-full object-cover"
-                      />
+              {/* Team Members - Centered for 2 members */}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+                  {teamData.hrOperations.map((member) => (
+                    <div
+                      key={member.id}
+                      className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 w-80 h-80"
+                      style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
+                    >
+                      <div className="flex flex-col items-center text-center h-full justify-center">
+                        <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            width={128}
+                            height={128}
+                            className="w-full h-full object-cover"
+                            quality={100}
+                            priority={true}
+                            unoptimized={true}
+                          />
+                        </div>
+                        <h3 className="text-white font-bold text-2xl mb-2">
+                          {member.name}
+                        </h3>
+                        <p className="text-gray-400 text-lg">{member.role}</p>
+                      </div>
                     </div>
-                    <h3 className="text-white font-bold text-2xl mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-gray-400 text-lg">{member.role}</p>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
           {/* Design & Video Team Section */}
-          <div>
+          <div className="mb-12">
             <div className="max-w-6xl mx-auto px-4 relative">
               {/* Header Section */}
               <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center mb-12 text-center relative">
                 <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-0">
                   Design & Video Team
                 </h2>
-                <button className="text-white underline hover:text-[#FF6300] transition-colors text-lg sm:absolute sm:right-0">
+                <Link
+                  href="/our-team/design-and-video-projects"
+                  className="text-white underline hover:text-[#FF6300] transition-colors text-lg sm:absolute sm:right-0"
+                >
                   View Projects
-                </button>
+                </Link>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-6">
-                {teamData.designVideoTeam.map((member) => (
-                  <div
-                    key={member.id}
-                    className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 h-80 w-[250px]"
-                    style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
-                  >
-                    <div className="flex flex-col items-center text-center h-full justify-center">
-                      <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          width={128}
-                          height={128}
-                          className="w-full h-full object-cover"
-                        />
+              {/* Team Members - Centered for 2 members */}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+                  {teamData.designVideoTeam.map((member) => (
+                    <div
+                      key={member.id}
+                      className="bg-[#262626] rounded-t-xl p-8 transition-all duration-300 hover:scale-105 w-80 h-80"
+                      style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
+                    >
+                      <div className="flex flex-col items-center text-center h-full justify-center">
+                        <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-600 flex items-center justify-center">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            width={128}
+                            height={128}
+                            className="w-full h-full object-cover"
+                            quality={100}
+                            priority={true}
+                            unoptimized={true}
+                          />
+                        </div>
+                        <h3 className="text-white font-bold text-2xl mb-2">
+                          {member.name}
+                        </h3>
+                        <p className="text-gray-400 text-lg">{member.role}</p>
                       </div>
-                      <h3 className="text-white font-bold text-2xl mb-2">
-                        {member.name}
-                      </h3>
-                      <p className="text-gray-400 text-lg">{member.role}</p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Background Image */}
-      <div className="relative h-64 md:h-screen overflow-hidden">
-        <Image
-          src="/our-team/our-team-bottom.png"
-          alt="Our Team Bottom Background"
-          fill
-          className="object-cover opacity-30"
-        />
-        {/* Fading black tint overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-black/30 to-black/80"></div>
       </div>
     </div>
   );
