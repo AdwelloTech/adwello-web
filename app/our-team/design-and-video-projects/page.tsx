@@ -1,71 +1,47 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
+import {
+  getAllDesignVideoProjects,
+  DesignVideoProject,
+} from "@/sanity/lib/designVideoProjects";
 
-const designAndVideoImages = [
-  {
-    id: 1,
-    title: "Adwello Social Media Post 1",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-1.jpg",
-  },
-  {
-    id: 2,
-    title: "Adwello Social Media Post 2",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-2.jpg",
-  },
-  {
-    id: 3,
-    title: "Adwello Social Media Post 3",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-3.jpg",
-  },
-  {
-    id: 4,
-    title: "Adwello Social Media Post 4",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-4.jpg",
-  },
-  {
-    id: 5,
-    title: "Adwello Social Media Post 5",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-5.jpg",
-  },
-  {
-    id: 6,
-    title: "Adwello Social Media Post 6",
-    image: "/our-team/design-and-video-team/adwello-social-media-post-6.jpg",
-  },
-];
+export default async function DesignAndVideoProjectsPage() {
+  let designVideoProjects: DesignVideoProject[] = [];
 
-export default function DesignAndVideoProjectsPage() {
+  try {
+    designVideoProjects = await getAllDesignVideoProjects();
+  } catch (error) {
+    console.error("Error fetching design and video projects:", error);
+    designVideoProjects = [];
+  }
+
   return (
     <div className="min-h-screen bg-black">
       {/* Content Section with Overlapping Backgrounds */}
       <div className="relative z-10 bg-black py-16 md:py-24">
         {/* Top Background Image Overlay */}
-        <div className="absolute top-0 left-0 right-0 h-[600px] md:h-[800px] overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-[655px] overflow-hidden pointer-events-none">
           <Image
             src="/our-team/our-team-top.png"
             alt="Design and Video Projects Top Background"
             fill
-            className="object-cover object-top opacity-40"
+            className="object-cover object-top opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/70"></div>
         </div>
 
         {/* Bottom Background Image Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-[500px] md:h-[800px] overflow-hidden pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 h-[655px] overflow-hidden pointer-events-none">
           <Image
             src="/our-team/our-team-bottom.png"
             alt="Design and Video Projects Bottom Background"
             fill
-            className="object-contain object-bottom opacity-40"
+            className="object-cover object-bottom opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/30 to-black/70"></div>
         </div>
 
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Projects Section */}
-          <div className="mb-20">
+          <div className="mb-220">
             <div className="max-w-6xl mx-auto px-4 relative">
               {/* Header Section */}
               <div className="text-center mb-16 mt-16">
@@ -76,24 +52,36 @@ export default function DesignAndVideoProjectsPage() {
               </div>
 
               {/* Images Grid */}
-              <div className="flex justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                  {designAndVideoImages.map((item) => (
-                    <div key={item.id} className="w-full">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={400}
-                        height={400}
-                        className="w-full h-auto rounded-lg"
-                        quality={100}
-                        priority={true}
-                        unoptimized={true}
-                      />
-                    </div>
-                  ))}
+              {designVideoProjects.length > 0 ? (
+                <div className="flex justify-center">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    {designVideoProjects.map((project) => (
+                      <div key={project._id} className="w-full">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          width={400}
+                          height={400}
+                          className="w-full h-auto rounded-lg"
+                          quality={100}
+                          priority={true}
+                          unoptimized={true}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="text-center text-white py-12">
+                  <p className="text-lg mb-4">
+                    No design and video projects available yet.
+                  </p>
+                  <p className="text-gray-400">
+                    Create design and video projects in Sanity Studio to see
+                    them here.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
