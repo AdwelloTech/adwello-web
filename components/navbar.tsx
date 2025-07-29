@@ -1,16 +1,16 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
   const { scrollY } = useScroll();
   const navbarY = useTransform(scrollY, [0, 100], [0, -20]);
@@ -18,6 +18,10 @@ const AppNavbar = () => {
   const navbarScale = useTransform(scrollY, [0, 100], [1, 0.95]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +41,16 @@ const AppNavbar = () => {
     alt: "Chat",
     width: 24,
     height: 24,
+  };
+
+  // Check if link is active - only after component is mounted
+  const isActive = (href: string) => {
+    if (!mounted) return false;
+
+    if (href === "/#home" || href === "#home") {
+      return pathname === "/" || pathname === "/home";
+    }
+    return pathname === href;
   };
 
   // Animation variants
@@ -158,7 +172,11 @@ const AppNavbar = () => {
             <div className="px-14 flex items-center space-x-10">
               <motion.a
                 href="/#home"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                className={`px-3 py-2 text-md font-bold rounded-md transition-colors duration-200 relative ${
+                  isActive("/#home")
+                    ? "text-[#FF6300]"
+                    : "text-white hover:text-[#FF6300]"
+                }`}
                 variants={navItemVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -179,7 +197,11 @@ const AppNavbar = () => {
               </motion.a>
               <motion.a
                 href="#services"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                className={`px-3 py-2 text-md font-bold rounded-md transition-colors duration-200 relative ${
+                  isActive("#services")
+                    ? "text-[#FF6300]"
+                    : "text-white hover:text-[#FF6300]"
+                }`}
                 variants={navItemVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -201,7 +223,11 @@ const AppNavbar = () => {
               </motion.a>
               <motion.a
                 href="/about-us"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                className={`px-3 py-2 text-md font-bold rounded-md transition-colors duration-200 relative ${
+                  isActive("/about-us")
+                    ? "text-[#FF6300]"
+                    : "text-white hover:text-[#FF6300]"
+                }`}
                 variants={navItemVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -218,7 +244,11 @@ const AppNavbar = () => {
               </motion.a>
               <motion.a
                 href="/blog"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                className={`px-3 py-2 text-md font-bold rounded-md transition-colors duration-200 relative ${
+                  isActive("/blog")
+                    ? "text-[#FF6300]"
+                    : "text-white hover:text-[#FF6300]"
+                }`}
                 variants={navItemVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -235,7 +265,11 @@ const AppNavbar = () => {
               </motion.a>
               <motion.a
                 href="/our-team"
-                className="text-gray-900 px-3 py-2 text-md font-bold text-white hover:text-[#FF6300] rounded-md transition-colors duration-200 relative"
+                className={`px-3 py-2 text-md font-bold rounded-md transition-colors duration-200 relative ${
+                  isActive("/our-team")
+                    ? "text-[#FF6300]"
+                    : "text-white hover:text-[#FF6300]"
+                }`}
                 variants={navItemVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -312,7 +346,7 @@ const AppNavbar = () => {
           >
             <button
               onClick={toggleMenu}
-              className="text-gray-900 hover:text-[#FF6300] focus:outline-none"
+              className="text-white hover:text-[#FF6300] focus:outline-none"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -336,7 +370,11 @@ const AppNavbar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
             <motion.a
               href="#home"
-              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                isActive("/#home")
+                  ? "bg-[#FF6300] text-white"
+                  : "text-gray-900 hover:bg-[#FF6300] hover:text-white"
+              }`}
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.95 }}
               onClick={(e) => {
@@ -349,7 +387,11 @@ const AppNavbar = () => {
             </motion.a>
             <motion.a
               href="#services"
-              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                isActive("#services")
+                  ? "bg-[#FF6300] text-white"
+                  : "text-gray-900 hover:bg-[#FF6300] hover:text-white"
+              }`}
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.95 }}
               onClick={(e) => {
@@ -362,7 +404,11 @@ const AppNavbar = () => {
             </motion.a>
             <motion.a
               href="/about-us"
-              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                isActive("/about-us")
+                  ? "bg-[#FF6300] text-white"
+                  : "text-gray-900 hover:bg-[#FF6300] hover:text-white"
+              }`}
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -370,7 +416,11 @@ const AppNavbar = () => {
             </motion.a>
             <motion.a
               href="/blog"
-              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                isActive("/blog")
+                  ? "bg-[#FF6300] text-white"
+                  : "text-gray-900 hover:bg-[#FF6300] hover:text-white"
+              }`}
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -378,7 +428,11 @@ const AppNavbar = () => {
             </motion.a>
             <motion.a
               href="/our-team"
-              className="text-gray-900 block px-3 py-2 text-base font-medium hover:bg-[#FF6300] hover:text-white rounded-md transition-colors duration-200"
+              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                isActive("/our-team")
+                  ? "bg-[#FF6300] text-white"
+                  : "text-gray-900 hover:bg-[#FF6300] hover:text-white"
+              }`}
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.95 }}
             >

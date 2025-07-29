@@ -27,9 +27,9 @@ export default async function OurTeamPage() {
 
   const teamCategories = {
     leadershipTeam: "Leadership Team",
+    hrOperations: "HR & Operations",
     techTeam: "Tech Team",
     marketingTeam: "Marketing Team",
-    hrOperations: "HR & Operations",
     designVideoTeam: "Design & Video Team",
   };
 
