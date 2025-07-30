@@ -7,6 +7,7 @@ export interface TeamMember {
   image: string;
   teamCategory: string;
   order: number;
+  slug: { current: string };
 }
 
 export async function getAllTeamMembers(): Promise<TeamMember[]> {
@@ -17,7 +18,8 @@ export async function getAllTeamMembers(): Promise<TeamMember[]> {
       role,
       "image": image.asset->url,
       teamCategory,
-      order
+      order,
+      slug
     }
   `);
 }
@@ -33,7 +35,8 @@ export async function getTeamMembersByCategory(
       role,
       "image": image.asset->url,
       teamCategory,
-      order
+      order,
+      slug
     }
   `,
     { category }
@@ -44,4 +47,30 @@ export async function getTeamCategories(): Promise<string[]> {
   return client.fetch(`
     array::distinct(*[_type == "teamMember"].teamCategory)
   `);
+}
+
+export async function getTeamMemberBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "teamMember" && slug.current == $slug][0] {
+      _id,
+      name,
+      role,
+      "image": image.asset->url,
+      teamCategory,
+      order,
+      slug,
+      portfolio,
+      portfolioType,
+      portfolioGallery[]{asset->{url}},
+      portfolioDescription,
+      portfolioLinks[]{name, url},
+      techStack[]{name, image{asset->{url}}},
+      github,
+      linkedin,
+      website,
+      portfolioProjects[]{name, description, link, url, image{asset->{url}}},
+      portfolioCampaigns
+    }`,
+    { slug }
+  );
 }

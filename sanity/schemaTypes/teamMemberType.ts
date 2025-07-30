@@ -47,6 +47,117 @@ export default defineType({
       type: "number",
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "name", maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "portfolio",
+      title: "Portfolio",
+      type: "array",
+      of: [{ type: "block" }, { type: "image" }],
+    }),
+    defineField({
+      name: "portfolioType",
+      title: "Portfolio Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Developer", value: "developer" },
+          { title: "UI/UX Designer", value: "designer" },
+          { title: "Marketer", value: "marketer" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "portfolioGallery",
+      title: "Portfolio Gallery (Designers only)",
+      type: "array",
+      of: [{ type: "image" }],
+      hidden: ({ parent }) => parent.portfolioType !== "designer",
+    }),
+    defineField({
+      name: "portfolioDescription",
+      title: "Portfolio Description",
+      type: "text",
+    }),
+    defineField({
+      name: "techStack",
+      title: "Tech Stack (Developers only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "name", title: "Name", type: "string" },
+            { name: "image", title: "Logo/Image", type: "image" },
+          ],
+        },
+      ],
+      hidden: ({ parent }) => parent.portfolioType !== "developer",
+    }),
+    defineField({
+      name: "github",
+      title: "GitHub URL (Developers only)",
+      type: "url",
+      hidden: ({ parent }) => parent.portfolioType !== "developer",
+    }),
+    defineField({
+      name: "linkedin",
+      title: "LinkedIn URL (Developers only)",
+      type: "url",
+      hidden: ({ parent }) => parent.portfolioType !== "developer",
+    }),
+    defineField({
+      name: "website",
+      title: "Personal Website (Developers only)",
+      type: "url",
+      hidden: ({ parent }) => parent.portfolioType !== "developer",
+    }),
+    defineField({
+      name: "portfolioProjects",
+      title: "Projects (Developers only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "name", title: "Project Name", type: "string" },
+            { name: "description", title: "Description", type: "text" },
+            { name: "link", title: "Project Link", type: "url" },
+            { name: "image", title: "Project Image", type: "image" },
+            { name: "url", title: "Project URL", type: "url" },
+          ],
+        },
+      ],
+      hidden: ({ parent }) => parent.portfolioType !== "developer",
+    }),
+    defineField({
+      name: "portfolioLinks",
+      title: "Portfolio Links (Designers only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "name", title: "Link Name", type: "string" },
+            { name: "url", title: "URL", type: "url" },
+          ],
+        },
+      ],
+      hidden: ({ parent }) => parent.portfolioType !== "designer",
+    }),
+    defineField({
+      name: "portfolioCampaigns",
+      title: "Campaigns (Marketers only)",
+      type: "array",
+      of: [{ type: "string" }],
+      hidden: ({ parent }) => parent.portfolioType !== "marketer",
+    }),
   ],
   preview: {
     select: {

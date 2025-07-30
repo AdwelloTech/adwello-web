@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllTeamMembers, TeamMember } from "@/sanity/lib/team";
 
-export const revalidate = 0; // Always fetch fresh data (no cache)
+export const revalidate = 30; // Always fetch fresh data (no cache)
 
 export default async function OurTeamPage() {
   let teamMembers: TeamMember[] = [];
@@ -128,11 +128,12 @@ export default async function OurTeamPage() {
                       }`}
                     >
                       {members.map((member) => (
-                        <div
+                        <Link
                           key={member._id}
+                          href={`/our-team/${member.slug?.current || ""}`}
                           className={`bg-[#262626] rounded-t-xl p-6 transition-all duration-300 hover:scale-105 ${
                             members.length <= 2 ? "w-80 h-80 p-8" : "w-64 h-72"
-                          }`}
+                          } cursor-pointer`}
                           style={{ boxShadow: "0 4px 8px -2px #FF6300" }}
                         >
                           <div className="flex flex-col items-center text-center h-full justify-center">
@@ -155,7 +156,7 @@ export default async function OurTeamPage() {
                               {member.role}
                             </p>
                           </div>
-                        </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
