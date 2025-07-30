@@ -67,7 +67,8 @@ export default defineType({
       options: {
         list: [
           { title: "Developer", value: "developer" },
-          { title: "UI/UX Designer", value: "designer" },
+          { title: "UI/UX Designer", value: "uiuxDesigner" },
+          { title: "Graphic Designer", value: "graphicDesigner" },
           { title: "Marketer", value: "marketer" },
         ],
       },
@@ -78,7 +79,9 @@ export default defineType({
       title: "Portfolio Gallery (Designers only)",
       type: "array",
       of: [{ type: "image" }],
-      hidden: ({ parent }) => parent.portfolioType !== "designer",
+      hidden: ({ parent }) =>
+        parent.portfolioType !== "uiuxDesigner" &&
+        parent.portfolioType !== "graphicDesigner",
     }),
     defineField({
       name: "portfolioDescription",
@@ -149,7 +152,32 @@ export default defineType({
           ],
         },
       ],
-      hidden: ({ parent }) => parent.portfolioType !== "designer",
+      hidden: ({ parent }) =>
+        parent.portfolioType !== "uiuxDesigner" &&
+        parent.portfolioType !== "graphicDesigner",
+    }),
+    defineField({
+      name: "uiuxProjects",
+      title: "UI/UX Projects (UI/UX Designers only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "name", title: "Project Name", type: "string" },
+            { name: "description", title: "Description", type: "text" },
+            { name: "image", title: "Project Image", type: "image" },
+            { name: "link", title: "Project Link", type: "url" },
+            {
+              name: "tools",
+              title: "Tools Used",
+              type: "array",
+              of: [{ type: "string" }],
+            },
+          ],
+        },
+      ],
+      hidden: ({ parent }) => parent.portfolioType !== "uiuxDesigner",
     }),
     defineField({
       name: "portfolioCampaigns",

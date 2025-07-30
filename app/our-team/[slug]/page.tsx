@@ -43,51 +43,147 @@ export default async function TeamMemberPortfolioPage({
     <div className={`min-h-screen ${layoutClass} py-12 px-4`}>
       <div className="max-w-5xl mx-auto bg-white/10 rounded-xl shadow-lg p-8 pt-20">
         {/* Portfolio Content by Type */}
-        {member.portfolioType === "designer" && (
-          <div className="space-y-10">
-            {/* About */}
-            <div>
-              <h2 className="text-3xl font-bold mb-2">About</h2>
-              <div className="prose max-w-none mb-4 text-lg text-gray-200">
-                {member.portfolioDescription}
+        {member.portfolioType === "uiuxDesigner" && (
+          <div className="space-y-12">
+            {/* Hero Section */}
+            <div className="text-center mb-12">
+              <div className="w-40 h-40 rounded-full overflow-hidden mb-6 mx-auto border-4 border-purple-500/20 shadow-2xl">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={160}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+                {member.name}
+              </h1>
+              <p className="text-xl text-gray-400 mb-2">{member.role}</p>
+              <div className="inline-block px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-400 text-sm font-medium">
+                UI/UX Designer
               </div>
             </div>
+
+            {/* About Section */}
+            {member.portfolioDescription && (
+              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-8 border border-purple-700/50 backdrop-blur-sm">
+                <h2 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full mr-4"></span>
+                  About
+                </h2>
+                <div className="prose prose-lg max-w-none text-gray-300 leading-relaxed">
+                  {member.portfolioDescription}
+                </div>
+              </div>
+            )}
+
+            {/* UI/UX Projects */}
+            {member.uiuxProjects && member.uiuxProjects.length > 0 && (
+              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-8 border border-purple-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-8 text-white flex items-center">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full mr-4"></span>
+                  UI/UX Projects
+                </h3>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {member.uiuxProjects.map((proj: any, i: number) => (
+                    <div
+                      key={i}
+                      className="bg-gray-800/60 rounded-xl border border-purple-700/30 overflow-hidden hover:border-purple-500/50 transition-all duration-300 group"
+                    >
+                      {proj.image?.asset?.url && (
+                        <div className="relative overflow-hidden">
+                          <Image
+                            src={proj.image.asset.url}
+                            alt={proj.name}
+                            width={400}
+                            height={200}
+                            className="object-cover h-48 w-full group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <div className="p-6">
+                        <h4 className="text-xl font-bold mb-3 text-white group-hover:text-purple-400 transition-colors">
+                          {proj.name}
+                        </h4>
+                        <p className="text-gray-300 mb-4 leading-relaxed">
+                          {proj.description}
+                        </p>
+                        {proj.tools && proj.tools.length > 0 && (
+                          <div className="mb-4">
+                            <p className="text-sm text-purple-400 font-medium mb-2">
+                              Tools Used:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {proj.tools.map((tool: string, j: number) => (
+                                <span
+                                  key={j}
+                                  className="px-3 py-1 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-full text-xs"
+                                >
+                                  {tool}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {proj.link && (
+                          <a
+                            href={proj.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block px-4 py-2 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-lg hover:bg-purple-500/20 transition-all duration-300 text-sm font-medium"
+                          >
+                            View Project
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Portfolio Gallery */}
             {member.portfolioGallery && member.portfolioGallery.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">
+              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-8 border border-purple-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-8 text-white flex items-center">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full mr-4"></span>
                   Portfolio Gallery
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {member.portfolioGallery.map((img: any, i: number) => (
                     <div
                       key={i}
-                      className="rounded-lg overflow-hidden border bg-white shadow-lg"
+                      className="rounded-xl overflow-hidden border border-purple-700/30 bg-gray-800/60 shadow-lg hover:border-purple-500/50 transition-all duration-300 group"
                     >
                       <Image
                         src={img.asset.url}
                         alt={member.name + " work " + (i + 1)}
                         width={400}
                         height={300}
-                        className="object-cover w-full h-64"
+                        className="object-cover w-full h-64 group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                   ))}
                 </div>
               </div>
             )}
+
             {/* Portfolio Links */}
             {member.portfolioLinks && member.portfolioLinks.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">Links</h3>
-                <div className="flex flex-wrap gap-4">
+              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-8 border border-purple-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full mr-4"></span>
+                  Links
+                </h3>
+                <div className="flex flex-wrap gap-4 justify-center">
                   {member.portfolioLinks.map((link: any, i: number) => (
                     <a
                       key={i}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white hover:text-[#FF6300] underline text-lg"
+                      className="px-6 py-3 bg-gray-800/80 border border-purple-700/50 text-purple-400 rounded-xl hover:border-purple-500/50 hover:bg-gray-800 transition-all duration-300 font-medium"
                     >
                       {link.name}
                     </a>

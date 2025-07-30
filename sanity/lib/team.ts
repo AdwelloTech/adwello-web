@@ -64,6 +64,7 @@ export async function getTeamMemberBySlug(slug: string) {
       portfolioGallery[]{asset->{url}},
       portfolioDescription,
       portfolioLinks[]{name, url},
+      uiuxProjects[]{name, description, link, tools, image{asset->{url}}},
       techStack[]{name, image{asset->{url}}},
       github,
       linkedin,
