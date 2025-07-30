@@ -105,21 +105,18 @@ export default defineType({
     }),
     defineField({
       name: "github",
-      title: "GitHub URL (Developers only)",
+      title: "GitHub URL",
       type: "url",
-      hidden: ({ parent }) => parent.portfolioType !== "developer",
     }),
     defineField({
       name: "linkedin",
-      title: "LinkedIn URL (Developers only)",
+      title: "LinkedIn URL",
       type: "url",
-      hidden: ({ parent }) => parent.portfolioType !== "developer",
     }),
     defineField({
       name: "website",
-      title: "Personal Website (Developers only)",
+      title: "Personal Website",
       type: "url",
-      hidden: ({ parent }) => parent.portfolioType !== "developer",
     }),
     defineField({
       name: "portfolioProjects",

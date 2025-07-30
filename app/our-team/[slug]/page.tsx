@@ -191,6 +191,49 @@ export default async function TeamMemberPortfolioPage({
                 </div>
               </div>
             )}
+            {/* Socials */}
+            {(member.github || member.linkedin || member.website) && (
+              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-8 border border-purple-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full mr-4"></span>
+                  Socials
+                </h3>
+                <div className="flex gap-6 items-center justify-center">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-purple-400"
+                      title="GitHub"
+                    >
+                      <GithubIcon size={32} />
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-purple-400"
+                      title="LinkedIn"
+                    >
+                      <LinkedInIcon size={32} />
+                    </a>
+                  )}
+                  {member.website && (
+                    <a
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-purple-400 underline text-lg"
+                    >
+                      Website
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
         {member.portfolioType === "developer" && (
@@ -370,18 +413,167 @@ export default async function TeamMemberPortfolioPage({
               )}
           </div>
         )}
-        {member.portfolioType === "marketer" && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-2">About</h2>
-            <div className="prose max-w-none mb-4">
-              {member.portfolioDescription}
+        {member.portfolioType === "designer" && (
+          <div className="space-y-10">
+            {/* About */}
+            <div>
+              <h2 className="text-3xl font-bold mb-2">About</h2>
+              <div className="prose max-w-none mb-4 text-lg text-gray-200">
+                {member.portfolioDescription}
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mt-6 mb-2">Campaigns</h3>
-            <ul className="list-disc ml-6">
-              {member.portfolioCampaigns?.map((c: string, i: number) => (
-                <li key={i}>{c}</li>
-              ))}
-            </ul>
+            {/* Portfolio Gallery */}
+            {member.portfolioGallery && member.portfolioGallery.length > 0 && (
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">
+                  Portfolio Gallery
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {member.portfolioGallery.map((img: any, i: number) => (
+                    <div
+                      key={i}
+                      className="rounded-lg overflow-hidden border bg-white shadow-lg"
+                    >
+                      <Image
+                        src={img.asset.url}
+                        alt={member.name + " work " + (i + 1)}
+                        width={400}
+                        height={300}
+                        className="object-cover w-full h-64"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* Portfolio Links */}
+            {member.portfolioLinks && member.portfolioLinks.length > 0 && (
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Links</h3>
+                <div className="flex flex-wrap gap-4">
+                  {member.portfolioLinks.map((link: any, i: number) => (
+                    <a
+                      key={i}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-[#FF6300] underline text-lg"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* Socials */}
+            {(member.github || member.linkedin || member.website) && (
+              <div className="bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-[#FF6300] rounded-full mr-4"></span>
+                  Socials
+                </h3>
+                <div className="flex gap-6 items-center justify-center">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#FF6300]"
+                      title="GitHub"
+                    >
+                      <GithubIcon size={32} />
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#FF6300]"
+                      title="LinkedIn"
+                    >
+                      <LinkedInIcon size={32} />
+                    </a>
+                  )}
+                  {member.website && (
+                    <a
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-[#FF6300] underline text-lg"
+                    >
+                      Website
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {member.portfolioType === "marketer" && (
+          <div className="space-y-10">
+            {/* About */}
+            <div>
+              <h2 className="text-3xl font-bold mb-2">About</h2>
+              <div className="prose max-w-none mb-4 text-lg text-gray-200">
+                {member.portfolioDescription}
+              </div>
+            </div>
+            {/* Campaigns */}
+            {member.portfolioCampaigns &&
+              member.portfolioCampaigns.length > 0 && (
+                <div>
+                  <h3 className="text-2xl font-semibold mb-4">Campaigns</h3>
+                  <ul className="list-disc ml-6">
+                    {member.portfolioCampaigns.map((c: string, i: number) => (
+                      <li key={i}>{c}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            {/* Socials */}
+            {(member.github || member.linkedin || member.website) && (
+              <div className="bg-gradient-to-r from-orange-900/30 to-orange-800/30 rounded-2xl p-8 border border-orange-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-orange-500 rounded-full mr-4"></span>
+                  Socials
+                </h3>
+                <div className="flex gap-6 items-center justify-center">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-orange-400"
+                      title="GitHub"
+                    >
+                      <GithubIcon size={32} />
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-orange-400"
+                      title="LinkedIn"
+                    >
+                      <LinkedInIcon size={32} />
+                    </a>
+                  )}
+                  {member.website && (
+                    <a
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-orange-400 underline text-lg"
+                    >
+                      Website
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
         {!member.portfolioType && (
