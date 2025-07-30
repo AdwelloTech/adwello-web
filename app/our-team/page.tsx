@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllTeamMembers, TeamMember } from "@/sanity/lib/team";
 
+export const revalidate = 0; // Always fetch fresh data (no cache)
+
 export default async function OurTeamPage() {
   let teamMembers: TeamMember[] = [];
 
