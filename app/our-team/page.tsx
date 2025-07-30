@@ -123,8 +123,12 @@ export default async function OurTeamPage() {
                   {/* Team Members */}
                   <div className="flex justify-center">
                     <div
-                      className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${
-                        members.length > 2 ? "lg:grid-cols-4" : "max-w-2xl"
+                      className={`grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center ${
+                        members.length > 3
+                          ? "lg:grid-cols-4"
+                          : members.length === 3
+                            ? "lg:grid-cols-3"
+                            : "max-w-2xl mx-auto"
                       }`}
                     >
                       {members.map((member) => (
