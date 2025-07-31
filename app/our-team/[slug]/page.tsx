@@ -22,18 +22,16 @@ export default async function TeamMemberPortfolioPage({
       layoutClass = "bg-gradient-to-br from-gray-900 to-black text-white";
       break;
     case "marketingTeam":
-      layoutClass =
-        "bg-gradient-to-br from-orange-100 to-orange-400 text-black";
+      layoutClass = "bg-gradient-to-br from-gray-900 to-black text-white";
       break;
     case "designVideoTeam":
-      layoutClass = "bg-gradient-to-br from-pink-200 to-purple-400 text-black";
+      layoutClass = "bg-gradient-to-br from-gray-900 to-black text-white";
       break;
     case "leadershipTeam":
-      layoutClass =
-        "bg-gradient-to-br from-yellow-100 to-yellow-300 text-black";
+      layoutClass = "bg-gradient-to-br from-gray-900 to-black text-white";
       break;
     case "hrOperations":
-      layoutClass = "bg-gradient-to-br from-green-100 to-green-300 text-black";
+      layoutClass = "bg-gradient-to-br from-gray-900 to-black text-white";
       break;
     default:
       layoutClass = "bg-white text-black";
@@ -567,6 +565,159 @@ export default async function TeamMemberPortfolioPage({
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:text-orange-400 underline text-lg"
+                    >
+                      Website
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {member.portfolioType === "leadership" && (
+          <div className="space-y-12">
+            {/* Hero Section */}
+            <div className="text-center mb-12">
+              <div className="w-44 h-44 rounded-full overflow-hidden mb-8 mx-auto border-4 border-amber-500/30 shadow-2xl">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={176}
+                  height={176}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-amber-200 bg-clip-text text-transparent">
+                {member.name}
+              </h1>
+              <p className="text-2xl text-amber-300 mb-3 font-medium">
+                {member.role}
+              </p>
+              <div className="inline-block px-6 py-3 bg-amber-500/10 border border-amber-500/40 rounded-full text-amber-300 text-lg font-semibold">
+                Executive Leadership
+              </div>
+            </div>
+
+            {/* Leadership Vision */}
+            {member.leadershipVision && (
+              <div className="bg-gradient-to-r from-amber-900/40 to-yellow-900/40 rounded-2xl p-10 border border-amber-700/50 backdrop-blur-sm">
+                <h2 className="text-4xl font-bold mb-8 text-white flex items-center justify-center">
+                  <span className="w-12 h-1 bg-amber-500 rounded-full mr-6"></span>
+                  Leadership Vision
+                  <span className="w-12 h-1 bg-amber-500 rounded-full ml-6"></span>
+                </h2>
+                <div className="prose prose-xl max-w-none text-gray-200 leading-relaxed text-center text-lg">
+                  "{member.leadershipVision}"
+                </div>
+              </div>
+            )}
+
+            {/* About Section */}
+            {member.portfolioDescription && (
+              <div className="bg-gradient-to-r from-amber-900/40 to-yellow-900/40 rounded-2xl p-8 border border-amber-700/50 backdrop-blur-sm">
+                <h2 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-amber-500 rounded-full mr-4"></span>
+                  About
+                </h2>
+                <div className="prose prose-lg max-w-none text-gray-300 leading-relaxed">
+                  {member.portfolioDescription}
+                </div>
+              </div>
+            )}
+
+            {/* Leadership Experience */}
+            {member.leadershipExperience &&
+              member.leadershipExperience.length > 0 && (
+                <div className="bg-gradient-to-r from-amber-900/40 to-yellow-900/40 rounded-2xl p-8 border border-amber-700/50 backdrop-blur-sm">
+                  <h3 className="text-3xl font-bold mb-8 text-white flex items-center">
+                    <span className="w-8 h-1 bg-amber-500 rounded-full mr-4"></span>
+                    Leadership Experience
+                  </h3>
+                  <div className="space-y-6">
+                    {member.leadershipExperience.map((exp: any, i: number) => (
+                      <div
+                        key={i}
+                        className="bg-gray-800/60 rounded-xl border border-amber-700/30 p-6 hover:border-amber-500/50 transition-all duration-300"
+                      >
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                          <h4 className="text-xl font-bold text-amber-300 mb-2 md:mb-0">
+                            {exp.title}
+                          </h4>
+                          <span className="text-amber-200 text-sm font-medium">
+                            {exp.duration}
+                          </span>
+                        </div>
+                        <p className="text-amber-400 font-semibold mb-3">
+                          {exp.company}
+                        </p>
+                        <p className="text-gray-300 leading-relaxed">
+                          {exp.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            {/* Key Achievements */}
+            {member.leadershipAchievements &&
+              member.leadershipAchievements.length > 0 && (
+                <div className="bg-gradient-to-r from-amber-900/40 to-yellow-900/40 rounded-2xl p-8 border border-amber-700/50 backdrop-blur-sm">
+                  <h3 className="text-3xl font-bold mb-8 text-white flex items-center">
+                    <span className="w-8 h-1 bg-amber-500 rounded-full mr-4"></span>
+                    Key Achievements
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {member.leadershipAchievements.map(
+                      (achievement: string, i: number) => (
+                        <div key={i} className="flex items-start space-x-4">
+                          <div className="w-2 h-2 bg-amber-500 rounded-full mt-3 flex-shrink-0"></div>
+                          <p className="text-gray-300 leading-relaxed">
+                            {achievement}
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+
+            {/* Socials */}
+            {(member.github || member.linkedin || member.website) && (
+              <div className="bg-gradient-to-r from-amber-900/40 to-yellow-900/40 rounded-2xl p-8 border border-amber-700/50 backdrop-blur-sm">
+                <h3 className="text-3xl font-bold mb-6 text-white flex items-center">
+                  <span className="w-8 h-1 bg-amber-500 rounded-full mr-4"></span>
+                  Connect
+                </h3>
+                <div className="flex gap-6 items-center justify-center">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-amber-400"
+                      title="GitHub"
+                    >
+                      <GithubIcon size={32} />
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-amber-400"
+                      title="LinkedIn"
+                    >
+                      <LinkedInIcon size={32} />
+                    </a>
+                  )}
+                  {member.website && (
+                    <a
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-amber-400 underline text-lg"
                     >
                       Website
                     </a>

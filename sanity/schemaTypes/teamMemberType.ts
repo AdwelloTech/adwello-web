@@ -70,6 +70,7 @@ export default defineType({
           { title: "UI/UX Designer", value: "uiuxDesigner" },
           { title: "Graphic Designer", value: "graphicDesigner" },
           { title: "Marketer", value: "marketer" },
+          { title: "Leadership", value: "leadership" },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -182,6 +183,36 @@ export default defineType({
       type: "array",
       of: [{ type: "string" }],
       hidden: ({ parent }) => parent.portfolioType !== "marketer",
+    }),
+    defineField({
+      name: "leadershipExperience",
+      title: "Leadership Experience (Leadership only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", title: "Position Title", type: "string" },
+            { name: "company", title: "Company", type: "string" },
+            { name: "duration", title: "Duration", type: "string" },
+            { name: "description", title: "Description", type: "text" },
+          ],
+        },
+      ],
+      hidden: ({ parent }) => parent.portfolioType !== "leadership",
+    }),
+    defineField({
+      name: "leadershipAchievements",
+      title: "Key Achievements (Leadership only)",
+      type: "array",
+      of: [{ type: "string" }],
+      hidden: ({ parent }) => parent.portfolioType !== "leadership",
+    }),
+    defineField({
+      name: "leadershipVision",
+      title: "Leadership Vision & Philosophy (Leadership only)",
+      type: "text",
+      hidden: ({ parent }) => parent.portfolioType !== "leadership",
     }),
   ],
   preview: {
