@@ -443,10 +443,14 @@ const AppNavbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <button className="w-full bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-900 hover:text-white transition-all duration-200 flex items-center justify-center space-x-2">
+              <a
+                href="/contact"
+                className="w-full bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-900 hover:text-white transition-all duration-200 flex items-center justify-center space-x-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <MessageCircle className="w-5 h-5" />
                 <span>Let's Talk</span>
-              </button>
+              </a>
             </motion.div>
           </div>
         </motion.div>
